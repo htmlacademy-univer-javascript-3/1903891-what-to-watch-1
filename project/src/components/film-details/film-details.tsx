@@ -4,7 +4,6 @@ import FilmCard from '../film-card/film-card';
 import Footer from '../footer/footer';
 import FilmCardHero from '../film-card-hero/film-card-hero';
 
-
 function FilmDetails() {
   return (
     <Fragment>
@@ -53,7 +52,7 @@ function FilmDetails() {
                     Adrien Brody, <br/>
                     Ralph Fiennes, <br/>
                     Jeff Goldblum
-                  </span>
+                    </span>
                   </p>
                 </div>
 

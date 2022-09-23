@@ -3,7 +3,6 @@ import {Fragment} from 'react';
 import Footer from '../footer/footer';
 import FilmCard from '../film-card/film-card';
 import FilmCardHero from '../film-card-hero/film-card-hero';
-import ReviewItem from '../review-item/review-item';
 import ReviewCards from '../review-cards/review-cards';
 
 function FilmReviews() {
