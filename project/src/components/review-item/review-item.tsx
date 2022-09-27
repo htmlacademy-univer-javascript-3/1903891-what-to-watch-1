@@ -1,3 +1,5 @@
+import '../../css/main.min.css';
+
 function ReviewItem(){
   return (
     <div className="review">

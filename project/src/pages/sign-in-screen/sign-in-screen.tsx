@@ -1,5 +1,6 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
+import '../../css/main.min.css';
 
 function SignInScreen() {
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../footer/footer';
 import Logo from '../logo/logo';
+import '../../css/main.min.css';
 
 function SignInMessage() {
   return (

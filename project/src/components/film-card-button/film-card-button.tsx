@@ -1,4 +1,5 @@
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
+import '../../css/main.min.css';
 
 function FilmCardButton() {
   return (

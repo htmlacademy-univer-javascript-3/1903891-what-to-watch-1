@@ -1,3 +1,5 @@
+import '../../css/main.min.css';
+
 function Logo() {
   return (
     <div className="logo">

@@ -1,3 +1,5 @@
+import '../../css/main.min.css';
+
 function ItemGenresList() {
   return (
     // <li className="catalog__genres-item catalog__genres-item--active">

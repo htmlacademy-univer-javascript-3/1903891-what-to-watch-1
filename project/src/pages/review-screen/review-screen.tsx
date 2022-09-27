@@ -1,12 +1,16 @@
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import Logo from '../../components/logo/logo';
 
+import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
+import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
+import '../../css/main.min.css';
+
 function ReviewScreen() {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="../../../public/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={Hotel} alt="The Grand Budapest Hotel"/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -20,7 +24,7 @@ function ReviewScreen() {
                 <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
               </li>
               <li className="breadcrumbs__item">
-                <a href='#' className="breadcrumbs__link">Add review</a>
+                <a href="#" className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
           </nav>
@@ -29,7 +33,7 @@ function ReviewScreen() {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="../../../public/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+          <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
         </div>
       </div>
 

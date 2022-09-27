@@ -2,11 +2,14 @@ import Logo from '../logo/logo';
 import HeaderLoginIn from '../header-login-in/header-login-in';
 import FilmCardButton from '../film-card-button/film-card-button';
 
+import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
+import '../../css/main.min.css';
+
 function FilmCardHero() {
   return (
     <div className="film-card__hero">
       <div className="film-card__bg">
-        <img src="../../../public/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={Hotel} alt="The Grand Budapest Hotel"/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>

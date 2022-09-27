@@ -1,9 +1,11 @@
 import {Fragment} from 'react';
-
 import Footer from '../footer/footer';
 import FilmCard from '../film-card/film-card';
 import FilmCardHero from '../film-card-hero/film-card-hero';
 import ReviewCards from '../review-cards/review-cards';
+
+import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
+import '../../css/main.min.css';
 
 function FilmReviews() {
   return (
@@ -14,7 +16,7 @@ function FilmReviews() {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="../../../public/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+              <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
