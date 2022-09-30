@@ -1,13 +1,18 @@
+import Avatar from '../../img/avatar.jpg';
+import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
+
 function HeaderLoginIn() {
   return (
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar">
-          <img src="../../../public/img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+          <img src={Avatar} alt="User avatar" width="63" height="63"/>
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link">Sign out</a>
+        <Link to={AppRoute.Login} className="user-block__link">Sign out</Link>
       </li>
     </ul>
   );

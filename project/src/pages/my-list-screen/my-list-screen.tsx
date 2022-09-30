@@ -2,6 +2,7 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import FilmCard from '../../components/film-card/film-card';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
+import '../../css/main.min.css';
 
 function MyListScreen() {
   return (

@@ -1,10 +1,13 @@
 import {Fragment} from 'react';
 
-import FilmCard from '../film-card/film-card';
-import Footer from '../footer/footer';
-import FilmCardHero from '../film-card-hero/film-card-hero';
+import FilmCard from '../../components/film-card/film-card';
+import Footer from '../../components/footer/footer';
+import FilmCardHero from '../../components/film-card-hero/film-card-hero';
 
-function FilmDetails() {
+import '../../css/main.min.css';
+import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
+
+function FilmDetailsScreen() {
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -13,7 +16,7 @@ function FilmDetails() {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="../../../public/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+              <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
@@ -93,4 +96,4 @@ function FilmDetails() {
   );
 }
 
-export default FilmDetails;
+export default FilmDetailsScreen;

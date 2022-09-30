@@ -8,6 +8,9 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import FilmCardButton from '../../components/film-card-button/film-card-button';
 import ItemGenresList from '../../components/item-genres-list/item-genres-list';
 
+import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
+import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
+import '../../css/main.min.css';
 
 function GeneralScreen(props: FilmCardType) {
   const {countCard} = props;
@@ -15,7 +18,7 @@ function GeneralScreen(props: FilmCardType) {
     <Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="../../../public/img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+          <img src={Hotel} alt="The Grand Budapest Hotel"/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -28,7 +31,7 @@ function GeneralScreen(props: FilmCardType) {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="../../../public/img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+              <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
             </div>
 
             <div className="film-card__desc">
