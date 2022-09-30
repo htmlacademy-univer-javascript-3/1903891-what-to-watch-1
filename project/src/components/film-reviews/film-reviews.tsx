@@ -6,6 +6,7 @@ import ReviewCards from '../review-cards/review-cards';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
 
 function FilmReviews() {
   return (
@@ -23,13 +24,13 @@ function FilmReviews() {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Overview</a>
+                    <Link to='/' className="film-nav__link">Overview</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
+                    <Link to='/' className="film-nav__link">Details</Link>
                   </li>
                   <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Reviews</a>
+                    <Link to='/' className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>

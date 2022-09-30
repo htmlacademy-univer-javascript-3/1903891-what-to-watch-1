@@ -1,4 +1,5 @@
 import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
 
 function ItemGenresList() {
   return (
@@ -6,7 +7,7 @@ function ItemGenresList() {
     //   <a href="#" className="catalog__genres-link">All genres</a>
     // </li>
     <li className="catalog__genres-item">
-      <a href="#" className="catalog__genres-link">Comedies</a>
+      <Link to='/' className="catalog__genres-link">Comedies</Link>
     </li>
   );
 }

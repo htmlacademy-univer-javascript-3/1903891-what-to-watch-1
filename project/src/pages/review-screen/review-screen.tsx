@@ -4,6 +4,8 @@ import Logo from '../../components/logo/logo';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 function ReviewScreen() {
   return (
@@ -21,10 +23,10 @@ function ReviewScreen() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to='/' className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href="#" className="breadcrumbs__link">Add review</a>
+                <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

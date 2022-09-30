@@ -1,5 +1,6 @@
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
+import './player-screen.styles.css';
 
 function PlayerScreen() {
   return (
@@ -12,8 +13,7 @@ function PlayerScreen() {
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" >Toggler</div>
-            {/*style="left: 30%;" - должно быть в теге*/}
+            <div className="player__toggler">Toggler</div>
           </div>
           <div className="player__time-value">1:30:29</div>
         </div>

@@ -1,13 +1,14 @@
 import {Fragment} from 'react';
 
-import FilmCard from '../../components/film-card/film-card';
-import Footer from '../../components/footer/footer';
-import FilmCardHero from '../../components/film-card-hero/film-card-hero';
+import FilmCard from '../film-card/film-card';
+import Footer from '../footer/footer';
+import FilmCardHero from '../film-card-hero/film-card-hero';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
 
-function FilmsScreen() {
+function Films() {
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -23,13 +24,13 @@ function FilmsScreen() {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
+                    <Link to='/' className="film-nav__link">Overview</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
+                    <Link to='/' className="film-nav__link">Details</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
+                    <Link to='/' className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>
@@ -73,4 +74,4 @@ function FilmsScreen() {
   );
 }
 
-export default FilmsScreen;
+export default Films;
