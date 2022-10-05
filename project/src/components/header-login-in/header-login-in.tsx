@@ -1,5 +1,7 @@
 import Avatar from '../../img/avatar.jpg';
 import '../../css/main.min.css';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 function HeaderLoginIn() {
   return (
@@ -10,7 +12,7 @@ function HeaderLoginIn() {
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link">Sign out</a>
+        <Link to={AppRoute.Login} className="user-block__link">Sign out</Link>
       </li>
     </ul>
   );
