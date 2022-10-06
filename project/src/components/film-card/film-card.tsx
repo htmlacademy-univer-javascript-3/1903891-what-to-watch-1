@@ -1,14 +1,23 @@
 import '../../css/main.min.css';
-import Grindelwald from '../../img/fantastic-beasts-the-crimes-of-grindelwald.jpg';
+import {Link} from 'react-router-dom';
+import {Film} from '../../types/film';
+import {AppRoute} from '../../const';
 
-function FilmCard() {
+type FilmCardProps = {
+  film: Film,
+  onMouseOverHandler: (e: any) => void,
+}
+
+function FilmCard(props: FilmCardProps) {
+  const {film, onMouseOverHandler} = props;
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onMouseOver={onMouseOverHandler}>
       <div className="small-film-card__image">
-        <img src={Grindelwald} alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+        <img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name} width="280" height="175"/>
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
+        <Link className="small-film-card__link" to={`${AppRoute.FilmsList}/${film.id}`}>{film.filmCardInfo.name}</Link>
       </h3>
     </article>
   );

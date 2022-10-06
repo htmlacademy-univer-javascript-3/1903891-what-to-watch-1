@@ -1,19 +1,22 @@
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
-import './player-screen.styles.css';
+import {InitType} from '../../types/init';
+import {useParams} from 'react-router-dom';
+import {Film} from '../../types/film';
 
-function PlayerScreen() {
+function PlayerScreen(props: InitType) {
+  const {films} = props;
+  const {id} = useParams();
+  const film = films.find((el: Film) => el.id.toString() === id);
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="../../../public/img/player-poster.jpg"></video>
-
+      <video src={film!.filmCardInfo.videoLink} className="player__video" poster={film!.filmCardInfo.posterImage}/>
       <button type="button" className="player__exit">Exit</button>
-
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler">Toggler</div>
+            <progress className="player__progress" value="30" max="100"/>
+            <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
           <div className="player__time-value">1:30:29</div>
         </div>

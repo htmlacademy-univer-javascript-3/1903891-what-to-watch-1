@@ -3,8 +3,11 @@ import Logo from '../../components/logo/logo';
 import FilmCard from '../../components/film-card/film-card';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import '../../css/main.min.css';
+import {Film} from '../../types/film';
+import {InitType} from '../../types/init';
 
-function MyListScreen() {
+function MyListScreen(props: InitType) {
+  const {films} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -16,9 +19,11 @@ function MyListScreen() {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
-          {[...new Array(9)].map((el) => (
-            <FilmCard key={el}/>
-          ))}
+          {
+            films.map((el: Film) => (
+              <FilmCard key={el.id} film={el} onMouseOverHandler={() => {}}/>
+            ))
+          }
         </div>
       </section>
 

@@ -1,19 +1,19 @@
 import {Fragment} from 'react';
 
-import FilmCard from '../../components/film-card/film-card';
-import {FilmCardType} from '../../types/film-card';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import FilmCardButton from '../../components/film-card-button/film-card-button';
-import ItemGenresList from '../../components/item-genres-list/item-genres-list';
 
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
+import {InitType} from '../../types/init';
+import FilmList from '../../components/film-list/film-list';
+import ItemGenresList from '../../components/item-genres-list/item-genres-list';
 
-function GeneralScreen(props: FilmCardType) {
-  const {countCard} = props;
+function GeneralScreen(props: InitType) {
+  const {films} = props;
   return (
     <Fragment>
       <section className="film-card">
@@ -41,13 +41,14 @@ function GeneralScreen(props: FilmCardType) {
                 <span className="film-card__year">2014</span>
               </p>
 
-              <FilmCardButton/>
+              <FilmCardButton film={films[0]}/>
             </div>
           </div>
         </div>
       </section>
 
       <div className="page-content">
+
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
@@ -57,17 +58,12 @@ function GeneralScreen(props: FilmCardType) {
             ))}
           </ul>
 
-          <div className="catalog__films-list">
-            {[...new Array(countCard)].map((el) => (
-              <FilmCard key={el}/>
-            ))}
-          </div>
+          <FilmList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
-
         <Footer/>
       </div>
     </Fragment>
