@@ -6,13 +6,19 @@ import FilmCardHero from '../film-card-hero/film-card-hero';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
-import {Link} from 'react-router-dom';
+import {Film} from '../../types/film';
+import FilmCardNav from '../film-card-nav/film-card-nav';
 
-function Films() {
+type filmsProp = {
+  film: Film
+};
+
+function Films(props: filmsProp) {
+  const {film} = props;
   return (
     <Fragment>
       <section className="film-card film-card--full">
-        <FilmCardHero/>
+        <FilmCardHero film={film}/>
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -21,19 +27,7 @@ function Films() {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to='/' className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to='/' className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to='/' className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
-              </nav>
+              <FilmCardNav/>
 
               <div className="film-rating">
                 <div className="film-rating__score">8,9</div>
@@ -62,8 +56,9 @@ function Films() {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {[...new Array(4)].map((el) => (
-              <FilmCard key={el}/>
+            {[...new Array(4)].map((el: Film) => (
+              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
+              // заглушка - убери!
             ))}
           </div>
         </section>

@@ -2,28 +2,30 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import Logo from '../../components/logo/logo';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import '../../css/main.min.css';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {InitType} from '../../types/init';
+import {Film} from '../../types/film';
+import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 
-function ReviewScreen() {
+function ReviewScreen(props: InitType) {
+  const {films} = props;
+  const {id} = useParams();
+  const film = films.find((el: Film) => el.id.toString() === id);
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={Hotel} alt="The Grand Budapest Hotel"/>
+          <img src={film!.filmCardInfo.posterImage} alt={film!.filmCardInfo.name}/>
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header">
           <Logo/>
-
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to='/' className="breadcrumbs__link">The Grand Budapest Hotel</Link>
+                <Link to="/" className="breadcrumbs__link">{film!.filmCardInfo.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
@@ -75,13 +77,7 @@ function ReviewScreen() {
             </div>
           </div>
 
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-            <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
-            </div>
-
-          </div>
+          <CommentSubmissionForm/>
         </form>
       </div>
 

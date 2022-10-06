@@ -6,12 +6,19 @@ import FilmCardHero from '../../components/film-card-hero/film-card-hero';
 
 import '../../css/main.min.css';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
+import {Film} from '../../types/film';
+import FilmCardNav from '../../components/film-card-nav/film-card-nav';
 
-function FilmDetailsScreen() {
+export type FilmDetailsScreenType = {
+  films: Film[],
+}
+
+function FilmDetailsScreen(props: FilmDetailsScreenType) {
+  const {films} = props;
   return (
     <Fragment>
       <section className="film-card film-card--full">
-        <FilmCardHero/>
+        <FilmCardHero film={films[0]}/>
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
@@ -20,19 +27,7 @@ function FilmDetailsScreen() {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+              <FilmCardNav/>
 
               <div className="film-card__text film-card__row">
                 <div className="film-card__text-col">
@@ -84,12 +79,12 @@ function FilmDetailsScreen() {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {[...new Array(4)].map((el) => (
-              <FilmCard key={el}/>
+            {films &&
+            films.map((product: Film) => (
+              <FilmCard key={product.id} film={product} onMouseOverHandler={() => 'r'}/>
             ))}
           </div>
         </section>
-
         <Footer/>
       </div>
     </Fragment>
