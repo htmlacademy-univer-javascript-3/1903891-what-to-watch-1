@@ -57,8 +57,8 @@ function Films(props: filmsProp) {
 
           <div className="catalog__films-list">
             {[...new Array(4)].map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => {
-              }}/>
+              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
+              // заглушка - убери!
             ))}
           </div>
         </section>

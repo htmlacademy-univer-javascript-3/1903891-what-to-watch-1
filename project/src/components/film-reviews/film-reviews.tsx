@@ -6,7 +6,6 @@ import ReviewCards from '../review-cards/review-cards';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
-import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import FilmCardNav from '../film-card-nav/film-card-nav';
 
@@ -49,8 +48,8 @@ function FilmReviews(props: filmReviewsProp) {
           </div>
         </section>
         {[...new Array(4)].map((el: Film) => (
-          <FilmCard key={el.id} film={el} onMouseOverHandler={() => {
-          }}/>
+          <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
+          // заглушка - убери!
         ))}
         <Footer/>
       </div>

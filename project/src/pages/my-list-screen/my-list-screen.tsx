@@ -21,7 +21,8 @@ function MyListScreen(props: InitType) {
         <div className="catalog__films-list">
           {
             films.map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => {}}/>
+              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
+              // заглушка - убери!{}}/>
             ))
           }
         </div>

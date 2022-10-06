@@ -13,6 +13,8 @@ function FilmList(props: FilmListProp) {
   const [activeCard, setActiveCard] = useState(0);
   return (
     <div className="catalog__films-list">
+      {activeCard}
+      {/*заглушка - убери!*/}
       {
         films.map((film: Film) => (
           <FilmCard key={film.id} film={film} onMouseOverHandler={(e: any) => {

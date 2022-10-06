@@ -81,8 +81,7 @@ function FilmDetailsScreen(props: FilmDetailsScreenType) {
           <div className="catalog__films-list">
             {films &&
             films.map((product: Film) => (
-              <FilmCard key={product.id} film={product} onMouseOverHandler={() => {
-              }}/>
+              <FilmCard key={product.id} film={product} onMouseOverHandler={() => 'r'}/>
             ))}
           </div>
         </section>
