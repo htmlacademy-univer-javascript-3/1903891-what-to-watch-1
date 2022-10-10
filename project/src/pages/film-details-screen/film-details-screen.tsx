@@ -1,13 +1,14 @@
-import {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 
 import FilmCard from '../../components/film-card/film-card';
 import Footer from '../../components/footer/footer';
 import FilmCardHero from '../../components/film-card-hero/film-card-hero';
 
 import '../../css/main.min.css';
-import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import {Film} from '../../types/film';
 import FilmCardNav from '../../components/film-card-nav/film-card-nav';
+import {Navigate, useParams} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 export type FilmDetailsScreenType = {
   films: Film[],
@@ -15,63 +16,62 @@ export type FilmDetailsScreenType = {
 
 function FilmDetailsScreen(props: FilmDetailsScreenType) {
   const {films} = props;
+  const {id} = useParams();
+  const film = films.find((el: Film) => el.id.toString() === id);
+  const [activeCard, setActiveCard] = useState(-1);
+
   return (
     <Fragment>
       <section className="film-card film-card--full">
-        <FilmCardHero film={films[0]}/>
-
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
-            </div>
-
-            <div className="film-card__desc">
-              <FilmCardNav/>
-
-              <div className="film-card__text film-card__row">
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Director</strong>
-                    <span className="film-card__details-value">Wes Anderson</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Starring</strong>
-                    <span className="film-card__details-value">
-                    Bill Murray, <br/>
-                    Edward Norton, <br/>
-                    Jude Law, <br/>
-                    Willem Dafoe, <br/>
-                    Saoirse Ronan, <br/>
-                    Tony Revoloru, <br/>
-                    Tilda Swinton, <br/>
-                    Tom Wilkinson, <br/>
-                    Owen Wilkinson, <br/>
-                    Adrien Brody, <br/>
-                    Ralph Fiennes, <br/>
-                    Jeff Goldblum
-                    </span>
-                  </p>
+        {film !== undefined ?
+          <>
+            <FilmCardHero film={film}/>
+            <div className="film-card__wrap film-card__translate-top">
+              <div className="film-card__info">
+                <div className="film-card__poster film-card__poster--big">
+                  <img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name} width="218" height="327"/>
                 </div>
 
-                <div className="film-card__text-col">
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Run Time</strong>
-                    <span className="film-card__details-value">1h 39m</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Genre</strong>
-                    <span className="film-card__details-value">Comedy</span>
-                  </p>
-                  <p className="film-card__details-item">
-                    <strong className="film-card__details-name">Released</strong>
-                    <span className="film-card__details-value">2014</span>
-                  </p>
+                <div className="film-card__desc">
+                  <FilmCardNav/>
+
+                  <div className="film-card__text film-card__row">
+                    <div className="film-card__text-col">
+                      <p className="film-card__details-item">
+                        <strong className="film-card__details-name">Director</strong>
+                        <span className="film-card__details-value">{film.filmCardInfo.director}</span>
+                      </p>
+                      <p className="film-card__details-item">
+                        <strong className="film-card__details-name">Starring</strong>
+
+                        {film.filmCardInfo.starring.map((star: string, index) => (
+                          index === film.filmCardInfo.starring.length - 1
+                            ? <span className="film-card__details-value">{star}</span>
+                            : <span>{star},<br/></span>
+                        ))}
+                      </p>
+                    </div>
+
+                    <div className="film-card__text-col">
+                      <p className="film-card__details-item">
+                        <strong className="film-card__details-name">Run Time</strong>
+                        <span className="film-card__details-value">{film.runTime}</span>
+                      </p>
+                      <p className="film-card__details-item">
+                        <strong className="film-card__details-name">Genre</strong>
+                        <span className="film-card__details-value">{film.filmCardInfo.genre}</span>
+                      </p>
+                      <p className="film-card__details-item">
+                        <strong className="film-card__details-name">Released</strong>
+                        <span className="film-card__details-value">{film.filmCardInfo.released}</span>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </>
+          : <Navigate to={AppRoute.NotFoundPage}/>}
       </section>
 
       <div className="page-content">
@@ -80,8 +80,20 @@ function FilmDetailsScreen(props: FilmDetailsScreenType) {
 
           <div className="catalog__films-list">
             {films &&
-            films.map((product: Film) => (
-              <FilmCard key={product.id} film={product} onMouseOverHandler={() => 'r'}/>
+            films.map((filmItem: Film) => (
+              <FilmCard
+                key={filmItem.id}
+                film={filmItem}
+                isActive={activeCard === filmItem.id}
+                onMouseOverHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(filmItem.id);
+                }}
+                onMouseLeaveHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(-1);
+                }}
+              />
             ))}
           </div>
         </section>

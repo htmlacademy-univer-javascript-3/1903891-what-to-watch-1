@@ -5,9 +5,11 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import {InitType} from '../../types/init';
+import {useState} from 'react';
 
 function MyListScreen(props: InitType) {
   const {films} = props;
+  const [activeCard, setActiveCard] = useState(-1);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -20,9 +22,20 @@ function MyListScreen(props: InitType) {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
           {
-            films.map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
-              // заглушка - убери!{}}/>
+            films.map((filmItem: Film) => (
+              <FilmCard
+                key={filmItem.id}
+                film={filmItem}
+                isActive={activeCard === filmItem.id}
+                onMouseOverHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(filmItem.id);
+                }}
+                onMouseLeaveHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(-1);
+                }}
+              />
             ))
           }
         </div>

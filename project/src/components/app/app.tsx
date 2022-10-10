@@ -37,6 +37,7 @@ function App(props: InitType): JSX.Element {
         <Route path={AppRoute.Player}>
           <Route path={':id'} element={<PlayerScreen films={films}/>}/>
         </Route>
+        <Route path={AppRoute.NotFoundPage} element={<NotFoundPage/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Route>
     </Routes>

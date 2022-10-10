@@ -1,4 +1,4 @@
-import {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 
 import FilmCard from '../film-card/film-card';
 import Footer from '../footer/footer';
@@ -15,6 +15,8 @@ type filmsProp = {
 
 function Films(props: filmsProp) {
   const {film} = props;
+  const [activeCard, setActiveCard] = useState(-1);
+
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -57,8 +59,19 @@ function Films(props: filmsProp) {
 
           <div className="catalog__films-list">
             {[...new Array(4)].map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
-              // заглушка - убери!
+              <FilmCard
+                key={el.id}
+                film={el}
+                isActive={activeCard === el.id}
+                onMouseOverHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(el.id);
+                }}
+                onMouseLeaveHandler={(e: any) => {
+                  e.preventDefault();
+                  setActiveCard(-1);
+                }}
+              />
             ))}
           </div>
         </section>

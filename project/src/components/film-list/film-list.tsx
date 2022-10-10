@@ -10,17 +10,24 @@ type FilmListProp = {
 
 function FilmList(props: FilmListProp) {
   const {films} = props;
-  const [activeCard, setActiveCard] = useState(0);
+  const [activeCard, setActiveCard] = useState(-1);
+
   return (
     <div className="catalog__films-list">
-      {activeCard}
-      {/*заглушка - убери!*/}
       {
         films.map((film: Film) => (
-          <FilmCard key={film.id} film={film} onMouseOverHandler={(e: any) => {
-            e.preventDefault();
-            setActiveCard(film.id);
-          }}
+          <FilmCard
+            key={film.id}
+            film={film}
+            isActive={activeCard === film.id}
+            onMouseOverHandler={(e: any) => {
+              e.preventDefault();
+              setActiveCard(film.id);
+            }}
+            onMouseLeaveHandler={(e: any) => {
+              e.preventDefault();
+              setActiveCard(-1);
+            }}
           />
         ))
       }
