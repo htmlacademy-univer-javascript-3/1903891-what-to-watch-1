@@ -8,12 +8,20 @@ import PrivateRoute from '../private-route/private-route';
 import ReviewScreen from '../../pages/review-screen/review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundPage from '../not-found-page/not-found-page';
-import {InitType} from '../../types/init';
-import FilmList from '../film-list/film-list';
-import FilmDetailsScreen from '../../pages/film-details-screen/film-details-screen';
+import FilmScreen from '../../pages/film-screen/film-screen';
+import FilmScreenOverview from '../film-screen-overview/film-screen-overview';
+import FilmScreenDetails from '../film-screen-details/film-screen-details';
+import FilmScreenReviews from '../film-screen-reviews/film-screen-reviews';
+import {Film} from '../../types/film';
+import MyListScreen from '../../pages/my-list-screen/my-list-screen';
+
+export type InitType ={
+  films: Film[],
+  //comments: Comment[]
+}
 
 function App(props: InitType): JSX.Element {
-  const {films} = props;
+  const {films/*, comments*/} = props;
   return (
     <Routes>
       <Route path="/">
@@ -21,12 +29,16 @@ function App(props: InitType): JSX.Element {
         <Route path={AppRoute.Login} element={<SignInScreen/>}/>
         <Route path={AppRoute.MyList} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-            <FilmList films={films}/>
+            <MyListScreen films={films}/>
           </PrivateRoute>
         }
         />
         <Route path={AppRoute.FilmsList}>
-          <Route path={':id'} element={<FilmDetailsScreen films={films}/>}/>
+          <Route path={':id'} element={<FilmScreen films={films}/>}>
+            <Route index element={<FilmScreenOverview films={films}/>}/>
+            <Route path={`${AppRoute.FilmDetails}`} element={<FilmScreenDetails films={films}/>}/>
+            <Route path={`${AppRoute.FilmReviews}`} element={<FilmScreenReviews /*comments={comments}*//>}/>
+          </Route>
           <Route path={`:id${AppRoute.AddReview}`} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <ReviewScreen films={films}/>

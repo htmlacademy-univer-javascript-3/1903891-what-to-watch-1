@@ -13,7 +13,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollTopOnMount/>
-      <App films={FILMS}/>
+      <App films={FILMS} /*comments={COMMENTS}*//>
     </BrowserRouter>
   </React.StrictMode>,
 );

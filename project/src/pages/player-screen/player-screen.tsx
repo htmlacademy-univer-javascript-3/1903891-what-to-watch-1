@@ -1,11 +1,14 @@
 import {useParams, useNavigate} from 'react-router-dom';
 
-import {InitType} from '../../types/init';
 import {Film} from '../../types/film';
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
 
-function PlayerScreen(props: InitType) {
+type PlayerScreenProps = {
+  films: Film[]
+}
+
+function PlayerScreen(props: PlayerScreenProps) {
   const {films} = props;
   const {id} = useParams();
   const navigate = useNavigate();

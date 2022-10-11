@@ -8,12 +8,15 @@ import FilmCardButton from '../../components/film-card-button/film-card-button';
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
-import {InitType} from '../../types/init';
 import FilmList from '../../components/film-list/film-list';
 import ItemGenresList from '../../components/item-genres-list/item-genres-list';
+import {Film} from '../../types/film';
 
+type GeneralScreenProps = {
+  films: Film[]
+}
 
-function GeneralScreen(props: InitType) {
+function GeneralScreen(props: GeneralScreenProps) {
   const {films} = props;
   return (
     <Fragment>
