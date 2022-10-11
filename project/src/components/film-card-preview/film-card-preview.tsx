@@ -1,5 +1,4 @@
 import {Fragment} from 'react';
-import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import Logo from '../logo/logo';
 import HeaderLoginIn from '../header-login-in/header-login-in';
 import FilmCardButton from '../film-card-button/film-card-button';

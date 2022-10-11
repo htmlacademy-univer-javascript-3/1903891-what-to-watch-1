@@ -23,12 +23,12 @@ function PreviewVideoPlayer(props: previewVideoPlayerProps) {
       {isSound ?
         (
           <video ref={videoRef} className="player__video" poster={posterImage}>
-            <source src={videoLink} type="video"/>
+            <source src={videoLink} type="video/mp4"/>
           </video>
         )
         : (
           <video ref={videoRef} className="player__video" poster={posterImage} muted>
-            <source src={videoLink} type="video"/>
+            <source src={videoLink} type="video/mp4"/>
           </video>
         )}
     </div>

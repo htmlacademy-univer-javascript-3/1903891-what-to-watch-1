@@ -1,6 +1,5 @@
-import {Fragment, useState} from 'react';
+import {Fragment} from 'react';
 
-import FilmCard from '../film-card/film-card';
 import Footer from '../footer/footer';
 import FilmCardHero from '../film-card-hero/film-card-hero';
 
@@ -10,12 +9,12 @@ import {Film} from '../../types/film';
 import FilmCardNav from '../film-card-nav/film-card-nav';
 
 type filmsProp = {
-  film: Film
+  film: Film,
+  renderFilmCard: (film: Film) => JSX.Element
 };
 
 function Films(props: filmsProp) {
-  const {film} = props;
-  const [activeCard, setActiveCard] = useState(-1);
+  const {film, renderFilmCard} = props;
 
   return (
     <Fragment>
@@ -59,19 +58,7 @@ function Films(props: filmsProp) {
 
           <div className="catalog__films-list">
             {[...new Array(4)].map((el: Film) => (
-              <FilmCard
-                key={el.id}
-                film={el}
-                isActive={activeCard === el.id}
-                onMouseOverHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(el.id);
-                }}
-                onMouseLeaveHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(-1);
-                }}
-              />
+              renderFilmCard(el)
             ))}
           </div>
         </section>

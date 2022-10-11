@@ -3,22 +3,28 @@ import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';
 import PreviewVideoPlayer from '../video-player/preview-video-player';
+import {useState} from 'react';
 
 type FilmCardProps = {
   film: Film,
-  isActive: boolean,
-  onMouseOverHandler: (e: any) => void,
-  onMouseLeaveHandler: (e: any) => void
 }
 
 function FilmCard(props: FilmCardProps) {
-  const {film, onMouseOverHandler, onMouseLeaveHandler, isActive} = props;
+  const {film} = props;
+  const [activeFilmCard, setActiveFilmCard] = useState(false);
+
+  function onMouseOverHandler() {
+    setActiveFilmCard(true);
+  }
+  function onMouseLeaveHandler() {
+    setActiveFilmCard(false);
+  }
 
   return (
     <article className="small-film-card catalog__films-card" onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       <div className="small-film-card__image">
         {
-          isActive ? (<PreviewVideoPlayer videoLink={film.filmCardInfo.previewVideoLink} posterImage={film.filmCardInfo.posterImage} isSound={false}/>)
+          activeFilmCard ? (<PreviewVideoPlayer videoLink={film.filmCardInfo.previewVideoLink} posterImage={film.filmCardInfo.posterImage} isSound={false}/>)
             : (<img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name} width="280" height="175"/>)
 
         }

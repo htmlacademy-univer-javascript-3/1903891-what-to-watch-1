@@ -1,15 +1,16 @@
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import FilmCard from '../../components/film-card/film-card';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
-import {InitType} from '../../types/init';
-import {useState} from 'react';
 
-function MyListScreen(props: InitType) {
-  const {films} = props;
-  const [activeCard, setActiveCard] = useState(-1);
+type MyListScreenProps = {
+  films: Film[],
+  renderFilmCard: (film: Film) => JSX.Element
+}
+
+function MyListScreen(props: MyListScreenProps) {
+  const {films, renderFilmCard} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -23,19 +24,7 @@ function MyListScreen(props: InitType) {
         <div className="catalog__films-list">
           {
             films.map((filmItem: Film) => (
-              <FilmCard
-                key={filmItem.id}
-                film={filmItem}
-                isActive={activeCard === filmItem.id}
-                onMouseOverHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(filmItem.id);
-                }}
-                onMouseLeaveHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(-1);
-                }}
-              />
+              renderFilmCard(filmItem)
             ))
           }
         </div>

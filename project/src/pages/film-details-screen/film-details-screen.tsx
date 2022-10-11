@@ -1,6 +1,5 @@
-import {Fragment, useState} from 'react';
+import {Fragment} from 'react';
 
-import FilmCard from '../../components/film-card/film-card';
 import Footer from '../../components/footer/footer';
 import FilmCardHero from '../../components/film-card-hero/film-card-hero';
 
@@ -9,16 +8,16 @@ import {Film} from '../../types/film';
 import FilmCardNav from '../../components/film-card-nav/film-card-nav';
 import {Navigate, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import FilmCard from '../../components/film-card/film-card';
 
 export type FilmDetailsScreenType = {
   films: Film[],
-}
+};
 
 function FilmDetailsScreen(props: FilmDetailsScreenType) {
   const {films} = props;
   const {id} = useParams();
   const film = films.find((el: Film) => el.id.toString() === id);
-  const [activeCard, setActiveCard] = useState(-1);
 
   return (
     <Fragment>
@@ -81,19 +80,7 @@ function FilmDetailsScreen(props: FilmDetailsScreenType) {
           <div className="catalog__films-list">
             {films &&
             films.map((filmItem: Film) => (
-              <FilmCard
-                key={filmItem.id}
-                film={filmItem}
-                isActive={activeCard === filmItem.id}
-                onMouseOverHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(filmItem.id);
-                }}
-                onMouseLeaveHandler={(e: any) => {
-                  e.preventDefault();
-                  setActiveCard(-1);
-                }}
-              />
+              <FilmCard key={filmItem.id} film={filmItem}/>
             ))}
           </div>
         </section>

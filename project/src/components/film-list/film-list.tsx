@@ -1,34 +1,19 @@
-import {useState} from 'react';
-import FilmCard from '../film-card/film-card';
-
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
+import FilmCard from '../film-card/film-card';
 
 type FilmListProp = {
-  films: Film[]
+  films: Film[],
 };
 
 function FilmList(props: FilmListProp) {
   const {films} = props;
-  const [activeCard, setActiveCard] = useState(-1);
 
   return (
     <div className="catalog__films-list">
       {
-        films.map((film: Film) => (
-          <FilmCard
-            key={film.id}
-            film={film}
-            isActive={activeCard === film.id}
-            onMouseOverHandler={(e: any) => {
-              e.preventDefault();
-              setActiveCard(film.id);
-            }}
-            onMouseLeaveHandler={(e: any) => {
-              e.preventDefault();
-              setActiveCard(-1);
-            }}
-          />
+        films.map((filmItem: Film) => (
+          <FilmCard key={filmItem.id} film={filmItem}/>
         ))
       }
     </div>
