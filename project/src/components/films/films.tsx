@@ -7,14 +7,14 @@ import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import FilmCardNav from '../film-card-nav/film-card-nav';
+import FilmCard from '../film-card/film-card';
 
 type filmsProp = {
   film: Film,
-  renderFilmCard: (film: Film) => JSX.Element
 };
 
 function Films(props: filmsProp) {
-  const {film, renderFilmCard} = props;
+  const {film} = props;
 
   return (
     <Fragment>
@@ -28,7 +28,7 @@ function Films(props: filmsProp) {
             </div>
 
             <div className="film-card__desc">
-              <FilmCardNav/>
+              <FilmCardNav id={film.id}/>
 
               <div className="film-rating">
                 <div className="film-rating__score">8,9</div>
@@ -58,7 +58,7 @@ function Films(props: filmsProp) {
 
           <div className="catalog__films-list">
             {[...new Array(4)].map((el: Film) => (
-              renderFilmCard(el)
+              <FilmCard film={el} key={el.id}/>
             ))}
           </div>
         </section>

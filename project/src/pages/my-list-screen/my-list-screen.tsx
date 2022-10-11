@@ -3,14 +3,14 @@ import Logo from '../../components/logo/logo';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
+import FilmCard from '../../components/film-card/film-card';
 
 type MyListScreenProps = {
   films: Film[],
-  renderFilmCard: (film: Film) => JSX.Element
 }
 
 function MyListScreen(props: MyListScreenProps) {
-  const {films, renderFilmCard} = props;
+  const {films} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -24,7 +24,7 @@ function MyListScreen(props: MyListScreenProps) {
         <div className="catalog__films-list">
           {
             films.map((filmItem: Film) => (
-              renderFilmCard(filmItem)
+              <FilmCard film={filmItem} key={filmItem.id}/>
             ))
           }
         </div>

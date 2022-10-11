@@ -5,11 +5,14 @@ import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import '../../css/main.min.css';
 import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {InitType} from '../../types/init';
 import {Film} from '../../types/film';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 
-function ReviewScreen(props: InitType) {
+type ReviewScreenProps = {
+  films: Film[]
+}
+
+function ReviewScreen(props: ReviewScreenProps) {
   const {films} = props;
   const {id} = useParams();
   const film = films.find((el: Film) => el.id.toString() === id);
