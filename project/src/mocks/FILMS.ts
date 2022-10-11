@@ -3,7 +3,7 @@ import Grindelwald from '../img/fantastic-beasts-the-crimes-of-grindelwald.jpg';
 import HotelPoster from '../img/the-grand-budapest-hotel-poster.jpg';
 import Hotel from '../img/bg-the-grand-budapest-hotel.jpg';
 
-export const films: Film[] = [
+export const FILMS: Film[] = [
   {
     id: 1,
     backgroundImage: `${Hotel}`,
@@ -11,7 +11,7 @@ export const films: Film[] = [
     rating: 8.9,
     scoresCount: 240,
     runTime: 99,
-    'isFavorite': false,
+    isFavorite: false,
     filmCardInfo: {
       name: 'The Grand Budapest Hotel',
       posterImage: `${HotelPoster}`,
@@ -21,7 +21,8 @@ export const films: Film[] = [
       description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
       director: 'Wes Anderson',
       starring: [
-        'Bill Murray'
+        'Bill Murray',
+        'Edward Norton'
       ],
       genre: 'Comedy',
       released: 2014
@@ -44,10 +45,12 @@ export const films: Film[] = [
       description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
       director: 'Wes',
       starring: [
-        'Bill Murray'
+        'Bill Murray',
+        'Willem Dafoe',
+        'Saoirse Ronan'
       ],
       genre: 'Comedy',
-      released: 2014
+      released: 1915
     },
   },
   {
@@ -92,7 +95,7 @@ export const films: Film[] = [
       starring: [
         'Murray'
       ],
-      genre: 'Comedy',
+      genre: 'Roman',
       released: 2004
     },
   },

@@ -1,17 +1,23 @@
+import {useParams, useNavigate} from 'react-router-dom';
+
+import {InitType} from '../../types/init';
+import {Film} from '../../types/film';
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
-import {InitType} from '../../types/init';
-import {useParams} from 'react-router-dom';
-import {Film} from '../../types/film';
 
 function PlayerScreen(props: InitType) {
   const {films} = props;
   const {id} = useParams();
+  const navigate = useNavigate();
   const film = films.find((el: Film) => el.id.toString() === id);
+  const goBack = () => navigate(-1);
+
   return (
     <div className="player">
-      <video src={film!.filmCardInfo.videoLink} className="player__video" poster={film!.filmCardInfo.posterImage}/>
-      <button type="button" className="player__exit">Exit</button>
+      <video className="player__video" poster={film!.filmCardInfo.posterImage}>
+        <source src={film!.filmCardInfo.videoLink} type="video/mp4"/>
+      </video>
+      <button type="button" className="player__exit" onClick={goBack}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

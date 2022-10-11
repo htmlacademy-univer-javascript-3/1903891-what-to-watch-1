@@ -12,6 +12,7 @@ import {InitType} from '../../types/init';
 import FilmList from '../../components/film-list/film-list';
 import ItemGenresList from '../../components/item-genres-list/item-genres-list';
 
+
 function GeneralScreen(props: InitType) {
   const {films} = props;
   return (

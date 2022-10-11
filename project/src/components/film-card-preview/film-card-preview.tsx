@@ -1,5 +1,4 @@
 import {Fragment} from 'react';
-import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import Logo from '../logo/logo';
 import HeaderLoginIn from '../header-login-in/header-login-in';
 import FilmCardButton from '../film-card-button/film-card-button';
@@ -12,10 +11,11 @@ type filmCardPreviewProp = {
 
 function FilmCardPreview(props: filmCardPreviewProp) {
   const {film} = props;
+
   return (
     <Fragment>
       <div className="film-card__bg">
-        <img src={Hotel} alt="The Grand Budapest Hotel"/>
+        <img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -27,10 +27,10 @@ function FilmCardPreview(props: filmCardPreviewProp) {
 
       <div className="film-card__wrap">
         <div className="film-card__desc">
-          <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+          <h2 className="film-card__title">{film.filmCardInfo.name}</h2>
           <p className="film-card__meta">
-            <span className="film-card__genre">Drama</span>
-            <span className="film-card__year">2014</span>
+            <span className="film-card__genre">{film.filmCardInfo.genre}</span>
+            <span className="film-card__year">{film.filmCardInfo.released}</span>
           </p>
 
           <FilmCardButton film={film}/>

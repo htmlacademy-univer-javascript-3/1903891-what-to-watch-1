@@ -1,13 +1,16 @@
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import FilmCard from '../../components/film-card/film-card';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
-import {InitType} from '../../types/init';
 
-function MyListScreen(props: InitType) {
-  const {films} = props;
+type MyListScreenProps = {
+  films: Film[],
+  renderFilmCard: (film: Film) => JSX.Element
+}
+
+function MyListScreen(props: MyListScreenProps) {
+  const {films, renderFilmCard} = props;
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -20,9 +23,8 @@ function MyListScreen(props: InitType) {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
           {
-            films.map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
-              // заглушка - убери!{}}/>
+            films.map((filmItem: Film) => (
+              renderFilmCard(filmItem)
             ))
           }
         </div>

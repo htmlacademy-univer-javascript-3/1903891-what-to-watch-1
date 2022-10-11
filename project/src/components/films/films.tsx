@@ -1,6 +1,5 @@
 import {Fragment} from 'react';
 
-import FilmCard from '../film-card/film-card';
 import Footer from '../footer/footer';
 import FilmCardHero from '../film-card-hero/film-card-hero';
 
@@ -10,11 +9,13 @@ import {Film} from '../../types/film';
 import FilmCardNav from '../film-card-nav/film-card-nav';
 
 type filmsProp = {
-  film: Film
+  film: Film,
+  renderFilmCard: (film: Film) => JSX.Element
 };
 
 function Films(props: filmsProp) {
-  const {film} = props;
+  const {film, renderFilmCard} = props;
+
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -57,8 +58,7 @@ function Films(props: filmsProp) {
 
           <div className="catalog__films-list">
             {[...new Array(4)].map((el: Film) => (
-              <FilmCard key={el.id} film={el} onMouseOverHandler={() => 'd'}/>
-              // заглушка - убери!
+              renderFilmCard(el)
             ))}
           </div>
         </section>
