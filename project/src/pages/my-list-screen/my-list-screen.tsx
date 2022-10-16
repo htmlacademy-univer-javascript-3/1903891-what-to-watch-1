@@ -1,7 +1,6 @@
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
-import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import FilmCard from '../../components/film-card/film-card';
 

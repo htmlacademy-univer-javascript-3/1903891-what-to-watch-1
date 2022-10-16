@@ -3,7 +3,6 @@ import {Fragment} from 'react';
 import Footer from '../../components/footer/footer';
 import FilmCardHero from '../../components/film-card-hero/film-card-hero';
 
-import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import FilmCardNav from '../../components/film-card-nav/film-card-nav';
 import {Navigate, Outlet, useParams} from 'react-router-dom';

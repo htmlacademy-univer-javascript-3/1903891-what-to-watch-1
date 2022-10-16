@@ -1,13 +1,10 @@
 import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import FilmCard from '../film-card/film-card';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type FilmListProp = {
-  films: Film[],
-};
-
-function FilmList(props: FilmListProp) {
-  const {films} = props;
+function FilmList() {
+  const films = useAppSelector((state) => state.films.filmsByGenre);
 
   return (
     <div className="catalog__films-list">

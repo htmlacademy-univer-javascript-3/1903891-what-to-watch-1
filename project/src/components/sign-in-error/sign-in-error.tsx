@@ -1,6 +1,5 @@
 import Logo from '../logo/logo';
 import Footer from '../footer/footer';
-import '../../css/main.min.css';
 
 function SignInError(){
   return(

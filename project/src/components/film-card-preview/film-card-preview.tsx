@@ -3,7 +3,6 @@ import Logo from '../logo/logo';
 import HeaderLoginIn from '../header-login-in/header-login-in';
 import FilmCardButton from '../film-card-button/film-card-button';
 import {Film} from '../../types/film';
-import '../../css/main.min.css';
 
 type filmCardPreviewProp = {
   film: Film

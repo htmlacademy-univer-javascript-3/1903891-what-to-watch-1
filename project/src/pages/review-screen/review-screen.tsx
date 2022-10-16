@@ -2,7 +2,6 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import Logo from '../../components/logo/logo';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import '../../css/main.min.css';
 import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {Film} from '../../types/film';

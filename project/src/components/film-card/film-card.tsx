@@ -1,4 +1,3 @@
-import '../../css/main.min.css';
 import {Link} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';

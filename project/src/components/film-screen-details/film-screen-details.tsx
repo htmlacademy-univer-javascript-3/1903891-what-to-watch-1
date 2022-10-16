@@ -1,6 +1,5 @@
 import {Film} from '../../types/film';
 import {useParams} from 'react-router-dom';
-import '../../css/main.min.css';
 
 type FilmScreenDetailsProps = {
   films: Film[]

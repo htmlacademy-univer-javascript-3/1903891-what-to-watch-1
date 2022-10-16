@@ -1,5 +1,4 @@
 import Avatar from '../../img/avatar.jpg';
-import '../../css/main.min.css';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 

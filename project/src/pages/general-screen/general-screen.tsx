@@ -7,17 +7,18 @@ import FilmCardButton from '../../components/film-card-button/film-card-button';
 
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import '../../css/main.min.css';
 import FilmList from '../../components/film-list/film-list';
-import ItemGenresList from '../../components/item-genres-list/item-genres-list';
 import {Film} from '../../types/film';
+import GenreList from '../../components/genre-list/genre-list';
+import {Genre} from '../../types/genre';
 
 type GeneralScreenProps = {
-  films: Film[]
+  films: Film[],
+  genres: Genre[]
 }
 
 function GeneralScreen(props: GeneralScreenProps) {
-  const {films} = props;
+  const {films, genres} = props;
   return (
     <Fragment>
       <section className="film-card">
@@ -56,13 +57,9 @@ function GeneralScreen(props: GeneralScreenProps) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            {[...new Array(10)].map((el) => (
-              <ItemGenresList key={el}/>
-            ))}
-          </ul>
+          <GenreList genres={genres}/>
 
-          <FilmList films={films}/>
+          <FilmList/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
