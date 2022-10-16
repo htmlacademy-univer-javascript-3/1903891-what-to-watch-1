@@ -1,5 +1,4 @@
 import {Link, useLocation} from 'react-router-dom';
-import '../../css/main.min.css';
 import {AppRoute} from '../../const';
 import {useEffect, useState} from 'react';
 

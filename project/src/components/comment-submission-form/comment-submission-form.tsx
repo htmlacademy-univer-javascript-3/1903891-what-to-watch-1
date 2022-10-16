@@ -1,7 +1,5 @@
 import {useState} from 'react';
 
-import '../../css/main.min.css';
-
 function CommentSubmissionForm() {
   const [reviewText, setReviewText] = useState('');
   return (

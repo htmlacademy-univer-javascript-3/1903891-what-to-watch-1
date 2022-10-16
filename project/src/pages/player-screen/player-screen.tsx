@@ -2,7 +2,6 @@ import {useParams, useNavigate} from 'react-router-dom';
 
 import {Film} from '../../types/film';
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
-import '../../css/main.min.css';
 
 type PlayerScreenProps = {
   films: Film[]

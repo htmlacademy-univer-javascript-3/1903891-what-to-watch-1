@@ -1,4 +1,3 @@
-import '../../css/main.min.css';
 import FilmCardPreview from '../film-card-preview/film-card-preview';
 import {Film} from '../../types/film';
 

@@ -2,7 +2,6 @@ import {Film} from '../../types/film';
 import {useParams} from 'react-router-dom';
 import {Fragment} from 'react';
 import {makeFilmRatingDescription} from '../../const';
-import '../../css/main.min.css';
 
 type FilmOverviewProps = {
   films: Film[]

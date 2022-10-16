@@ -1,4 +1,3 @@
-import '../../css/main.min.css';
 import {Link} from 'react-router-dom';
 
 function Logo() {

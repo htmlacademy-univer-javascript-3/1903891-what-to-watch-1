@@ -4,7 +4,6 @@ import Footer from '../footer/footer';
 import FilmCardHero from '../film-card-hero/film-card-hero';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import '../../css/main.min.css';
 import {Film} from '../../types/film';
 import FilmCardNav from '../film-card-nav/film-card-nav';
 import FilmCard from '../film-card/film-card';
