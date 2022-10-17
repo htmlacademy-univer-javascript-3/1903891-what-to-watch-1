@@ -363,6 +363,29 @@ export const FILMS: Film[] = [
     },
   },
   {
+    id: 116,
+    backgroundImage: `${Hotel}`,
+    backgroundColor: '#ffffff',
+    rating: 8,
+    scoresCount: 240,
+    runTime: 99,
+    'isFavorite': false,
+    filmCardInfo: {
+      name: 'Budapest',
+      posterImage: `${HotelPoster}`,
+      previewImage: `${Hotel}`,
+      videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+      previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+      description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+      director: 'Wes',
+      starring: [
+        'Murray'
+      ],
+      genre: 'Roman',
+      released: 2004
+    },
+  },
+  {
     id: 16,
     backgroundImage: `${Hotel}`,
     backgroundColor: '#ffffff',

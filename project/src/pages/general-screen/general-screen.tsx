@@ -60,10 +60,6 @@ function GeneralScreen(props: GeneralScreenProps) {
           <GenreList genres={genres}/>
 
           <FilmList/>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
         <Footer/>
       </div>
