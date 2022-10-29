@@ -1,16 +1,15 @@
-import {Film} from '../../types/film';
 import {useParams} from 'react-router-dom';
 import {Fragment} from 'react';
 import {makeFilmRatingDescription} from '../../const';
+import store from '../../store/store';
+import {getFilmByID} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type FilmOverviewProps = {
-  films: Film[]
-}
-
-function FilmScreenOverview(props: FilmOverviewProps) {
-  const {films} = props;
+function FilmScreenOverview() {
   const {id} = useParams();
-  const film = films.find((el: Film) => el.id.toString() === id);
+  store.dispatch(getFilmByID(id));
+  const film = useAppSelector((state) => state.films.filmByID);
+
   return (
     <Fragment>
       <div className="film-rating">

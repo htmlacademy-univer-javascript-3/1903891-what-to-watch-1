@@ -1,10 +1,9 @@
 import {useParams} from 'react-router-dom';
 import {Comment} from '../../types/comment';
 import CommentItem from '../comment-item/comment-item';
-
-type FilmScreenReviewsProps = {
-  comments: Comment[]
-}
+import {store} from '../../store/store';
+import {getCommentsByID} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 type GetTwoArrayComments = {
   commentArray: Comment[],
@@ -18,11 +17,11 @@ function getTwoArrayComments(arrayComments: Comment[]): [GetTwoArrayComments, Ge
   return [{commentArray: firstArrayComment, id: 1}, {commentArray: secondArrayComment, id: 2}];
 }
 
-function FilmScreenReviews(props: FilmScreenReviewsProps) {
-  const {comments} = props;
+function FilmScreenReviews() {
   const {id} = useParams();
-  const filmComments = comments.filter((commentItem: Comment) => commentItem.filmId.toString() === id);
-  const arrayColumns = getTwoArrayComments(filmComments);
+  store.dispatch(getCommentsByID(id));
+  const comments: Comment[] = useAppSelector((state) => state.films.commentsByID)
+  const arrayColumns = getTwoArrayComments(comments);
 
   return (
     <div className="film-card__reviews film-card__row">

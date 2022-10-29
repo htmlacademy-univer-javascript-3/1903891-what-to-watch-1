@@ -8,17 +8,14 @@ import FilmCardButton from '../../components/film-card-button/film-card-button';
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import FilmList from '../../components/film-list/film-list';
-import {Film} from '../../types/film';
 import GenreList from '../../components/genre-list/genre-list';
-import {Genre} from '../../types/genre';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type GeneralScreenProps = {
-  films: Film[],
-  genres: Genre[]
-}
 
-function GeneralScreen(props: GeneralScreenProps) {
-  const {films, genres} = props;
+function GeneralScreen() {
+  const genres = useAppSelector((state) => state.films.genreList);
+  const films = useAppSelector((state) => state.films.films);
+
   return (
     <Fragment>
       <section className="film-card">

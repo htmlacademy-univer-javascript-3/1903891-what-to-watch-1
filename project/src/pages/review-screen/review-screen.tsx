@@ -4,17 +4,16 @@ import Logo from '../../components/logo/logo';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import {Link, useParams} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {Film} from '../../types/film';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
+import store from '../../store/store';
+import {getFilmByID} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type ReviewScreenProps = {
-  films: Film[]
-}
-
-function ReviewScreen(props: ReviewScreenProps) {
-  const {films} = props;
+function ReviewScreen() {
   const {id} = useParams();
-  const film = films.find((el: Film) => el.id.toString() === id);
+  store.dispatch(getFilmByID(id));
+  const film = useAppSelector((state) => state.films.filmByID);
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

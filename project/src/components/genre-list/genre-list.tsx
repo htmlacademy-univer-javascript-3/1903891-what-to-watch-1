@@ -8,7 +8,7 @@ type GenreListProps = {
 
 function GenreList(props: GenreListProps) {
   const {genres} = props;
-  const selectGenre = useAppSelector((state) => state.films.genre);
+  const selectGenre = useAppSelector((state) => state.films.currentGenre);
   return (
     <ul className="catalog__genres-list">
       {genres.map((genreItem) => (

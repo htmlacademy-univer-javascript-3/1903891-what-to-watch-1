@@ -1,17 +1,15 @@
 import {useParams, useNavigate} from 'react-router-dom';
 
-import {Film} from '../../types/film';
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
+import store from '../../store/store';
+import {getFilmByID} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type PlayerScreenProps = {
-  films: Film[]
-}
-
-function PlayerScreen(props: PlayerScreenProps) {
-  const {films} = props;
+function PlayerScreen() {
   const {id} = useParams();
+  store.dispatch(getFilmByID(id));
+  const film = useAppSelector((state) => state.films.filmByID);
   const navigate = useNavigate();
-  const film = films.find((el: Film) => el.id.toString() === id);
   const goBack = () => navigate(-1);
 
   return (

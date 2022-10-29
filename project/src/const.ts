@@ -15,6 +15,10 @@ export enum AppRoute {
   NotFoundPage = 'notFoundPage',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Comments = '/comments'
+}
 
 export function makeFilmRatingDescription(rating: number): string {
   if (rating >= 0 && rating < 3) {
