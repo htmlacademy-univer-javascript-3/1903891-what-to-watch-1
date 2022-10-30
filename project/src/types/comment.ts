@@ -2,7 +2,7 @@ export type Comment = {
   id: number,
   filmId: number,
   comment: string,
-  date: Date,
+  date: string,
   rating: number,
   user: {
     id: number,

@@ -1,5 +1,25 @@
-.error-page-message{
-  align-items: center;
-  margin: 4rem auto;
+.wrapper-notFoundPage {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
   text-align: center;
+  flex-direction: column;
+}
+
+.title-back {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #273238;
+  padding: 2rem;
+  cursor: pointer;
+  border: 0.7px solid #65696c;
+  width: 35rem;
+  margin: 2rem auto 2rem auto;
+  background-color: white;
+  box-shadow: 2px 11px 43px -32px #273238;
+}
+
+.image {
+  height: 80vh;
 }

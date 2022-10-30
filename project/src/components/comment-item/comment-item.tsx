@@ -12,14 +12,14 @@ function getMonthString(numberMonth: number): string {
 
 function CommentItem(props: CommentItemProps) {
   const {comment} = props;
-  const commentDate = comment.date;
+  const commentDate = new Date(comment.date);
 
-  const dataCommentHumanType = ` ${getMonthString(commentDate.getMonth())} ${commentDate.getDay()}, ${commentDate.getFullYear()}`;
-  const dataCommentProgramType = [commentDate.getFullYear(), commentDate.getMonth() + 1, commentDate.getDay()].join('-');
+  const dataCommentHumanType = `${getMonthString(commentDate?.getMonth())} ${commentDate?.getDay()}, ${commentDate?.getFullYear()}`;
+  const dataCommentProgramType = [commentDate?.getFullYear(), commentDate?.getMonth() + 1, commentDate?.getDay()].join('-');
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{comment.comment}</p>
+        <p className="review__text">{comment?.comment}</p>
 
         <footer className="review__details">
           <cite className="review__author">{comment?.user.name}</cite>
@@ -27,7 +27,7 @@ function CommentItem(props: CommentItemProps) {
         </footer>
       </blockquote>
 
-      <div className="review__rating">{comment.rating}</div>
+      <div className="review__rating">{comment?.rating}</div>
     </div>
   );
 }

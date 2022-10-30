@@ -1,14 +1,9 @@
-import {useParams} from 'react-router-dom';
 import {Fragment} from 'react';
 import {makeFilmRatingDescription} from '../../const';
-import store from '../../store/store';
-import {getFilmByID} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function FilmScreenOverview() {
-  const {id} = useParams();
-  store.dispatch(getFilmByID(id));
-  const film = useAppSelector((state) => state.films.filmByID);
+  const film = useAppSelector((state) => state.filmCard.filmByID);
 
   return (
     <Fragment>
@@ -21,13 +16,13 @@ function FilmScreenOverview() {
       </div>
 
       <div className="film-card__text">
-        <p>{film!.filmCardInfo.description}</p>
+        <p>{film!.description}</p>
 
-        <p className="film-card__director"><strong>Director: {film!.filmCardInfo.director}</strong></p>
+        <p className="film-card__director"><strong>Director: {film!.director}</strong></p>
 
         <p className="film-card__starring"><strong>Starring: </strong>
-          {film!.filmCardInfo.starring.map((star: string, index) => (
-            index === film!.filmCardInfo.starring.length - 1
+          {film!.starring.map((star: string, index) => (
+            index === film!.starring.length - 1
               ? <strong key={star}>{star}</strong>
               : <strong key={star}>{star}, </strong>
           ))} <strong>and other</strong>

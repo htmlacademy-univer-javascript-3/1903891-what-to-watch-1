@@ -4,37 +4,47 @@ import Footer from '../../components/footer/footer';
 
 import {Film} from '../../types/film';
 import FilmCardNav from '../../components/film-card-nav/film-card-nav';
-import {Navigate, Outlet, useParams} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import FilmCard from '../../components/film-card/film-card';
-import store from '../../store/store';
-import {getFilmByID} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
+import FilmCardHero from '../../components/film-card-hero/film-card-hero';
+import FilmScreenOverview from '../../components/film-screen-overview/film-screen-overview';
+import FilmScreenReviews from '../../components/film-screen-reviews/film-screen-reviews';
+import FilmScreenDetails from '../../components/film-screen-details/film-screen-details';
 
+const FilmCardInfoFilmScreen = {
+  'Overview': <FilmScreenOverview/>,
+  'Details': <FilmScreenDetails/>,
+  'Reviews': <FilmScreenReviews/>
+};
 
 function FilmScreen() {
-  const {id} = useParams();
-  store.dispatch(getFilmByID(id));
-  const film = useAppSelector((state) => state.films.filmByID);
-  const films = useAppSelector((state) => state.films.films);
-  //const film = films.find((el: Film) => el.id.toString() === id);
+  const tabsOnCard = useAppSelector((state) => state.filmCard.tabsOnCard);
+  const film = useAppSelector((state) => state.filmCard.filmByID);
+  const films = useAppSelector((state) => state.filmList.films);
 
-  const similarFilmsByGenre = films.filter((filmItem: Film) => filmItem.filmCardInfo.genre === film!.filmCardInfo.genre).slice(0, 4);
+  let similarFilmsByGenre;
+  if (film !== undefined) {
+    similarFilmsByGenre = films.filter((filmItem: Film) => filmItem.id !== film.id && filmItem.genre === film.genre).slice(0, 4);
+  }
   return (
     <Fragment>
       <section className="film-card film-card--full">
         {film !== undefined ?
           <>
-            {/*<FilmCardHero film={film}/>*/}
+            <FilmCardHero film={film}/>
             <div className="film-card__wrap film-card__translate-top">
               <div className="film-card__info">
                 <div className="film-card__poster film-card__poster--big">
-                  <img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name} width="218" height="327"/>
+                  <img src={film.posterImage} alt={film.name} width="218" height="327"/>
                 </div>
 
                 <div className="film-card__desc">
-                  <FilmCardNav id={film.id}/>
-                  <Outlet/>
+                  <FilmCardNav/>
+                  {
+                    FilmCardInfoFilmScreen[tabsOnCard]
+                  }
                 </div>
               </div>
             </div>
@@ -47,7 +57,7 @@ function FilmScreen() {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {films &&
+            {films && similarFilmsByGenre &&
             similarFilmsByGenre.map((filmItem: Film) => (
               <FilmCard key={filmItem.id} film={filmItem}/>
             ))}

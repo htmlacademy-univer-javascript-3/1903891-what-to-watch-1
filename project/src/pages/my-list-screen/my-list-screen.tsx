@@ -7,7 +7,7 @@ import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 
 function MyListScreen() {
-  const films = useAppSelector((state) => state.films.films);
+  const films = useAppSelector((state) => state.filmList.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

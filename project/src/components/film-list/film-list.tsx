@@ -3,6 +3,7 @@ import {Film} from '../../types/film';
 import FilmCard from '../film-card/film-card';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 import {Fragment, useEffect, useState} from 'react';
+import {stat} from 'fs';
 
 function getCountPageFilms(countFilms: Film[]): number {
   if (countFilms.length > 8) {
@@ -17,7 +18,7 @@ function getCountPageFilms(countFilms: Film[]): number {
 }
 
 function FilmList() {
-  const films = useAppSelector((state) => state.films.filmsByGenre);
+  const films = useAppSelector((state) => state.filmList.filmsByGenre);
   const [filmsArray, setFilmsArray] = useState(films);
   const [currentPage, setCurrentPage] = useState(0);
   let countPage = getCountPageFilms(films);

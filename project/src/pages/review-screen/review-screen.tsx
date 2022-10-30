@@ -10,15 +10,15 @@ import {getFilmByID} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function ReviewScreen() {
-  const {id} = useParams();
-  store.dispatch(getFilmByID(id));
-  const film = useAppSelector((state) => state.films.filmByID);
+  // const {id} = useParams();
+  // store.dispatch(getFilmByID(id));
+  const film = useAppSelector((state) => state.filmCard.filmByID);
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film!.filmCardInfo.posterImage} alt={film!.filmCardInfo.name}/>
+          <img src={film!.posterImage} alt={film!.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -26,7 +26,7 @@ function ReviewScreen() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/" className="breadcrumbs__link">{film!.filmCardInfo.name}</Link>
+                <Link to="/" className="breadcrumbs__link">{film!.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>

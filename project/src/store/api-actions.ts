@@ -3,8 +3,9 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, RootState} from './store';
 import {AxiosInstance} from 'axios';
 import {APIRoute} from '../const';
-import {loadCommentsByID, loadFilmByID, loadFilms} from './film-list/film-list.action';
+import {loadFilms} from './film-list/film-list.action';
 import {Comment} from '../types/comment';
+import {loadCommentsByID, loadFilmByID} from './film-card/film-card.action';
 
 export const fetchQuestionAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -18,7 +19,7 @@ export const fetchQuestionAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const getFilmByID = createAsyncThunk<void, string | undefined, {
+export const getFilmByID = createAsyncThunk<void, number | undefined, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance,
@@ -30,7 +31,7 @@ export const getFilmByID = createAsyncThunk<void, string | undefined, {
   },
 );
 
-export const getCommentsByID = createAsyncThunk<void, string | undefined, {
+export const getCommentsByID = createAsyncThunk<void, number | undefined, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance,

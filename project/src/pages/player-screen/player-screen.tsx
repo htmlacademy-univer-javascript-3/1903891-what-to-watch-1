@@ -1,21 +1,17 @@
-import {useParams, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
-import store from '../../store/store';
-import {getFilmByID} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function PlayerScreen() {
-  const {id} = useParams();
-  store.dispatch(getFilmByID(id));
-  const film = useAppSelector((state) => state.films.filmByID);
+  const film = useAppSelector((state) => state.filmCard.filmByID);
   const navigate = useNavigate();
   const goBack = () => navigate(-1);
 
   return (
     <div className="player">
-      <video className="player__video" poster={film!.filmCardInfo.posterImage}>
-        <source src={film!.filmCardInfo.videoLink} type="video/mp4"/>
+      <video className="player__video" poster={film!.posterImage}>
+        <source src={film!.videoLink} type="video/mp4"/>
       </video>
       <button type="button" className="player__exit" onClick={goBack}>Exit</button>
       <div className="player__controls">

@@ -27,11 +27,7 @@ function App(): JSX.Element {
         }
         />
         <Route path={AppRoute.FilmsList}>
-          <Route path={':id'} element={<FilmScreen/>}>
-            <Route index element={<FilmScreenOverview/>}/>
-            <Route path={`${AppRoute.FilmDetails}`} element={<FilmScreenDetails/>}/>
-            <Route path={`${AppRoute.FilmReviews}`} element={<FilmScreenReviews/>}/>
-          </Route>
+          <Route path={':id'} element={<FilmScreen/>} />
           <Route path={`:id${AppRoute.AddReview}`} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <ReviewScreen/>

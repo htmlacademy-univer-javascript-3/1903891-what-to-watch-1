@@ -27,7 +27,7 @@ function Films(props: filmsProp) {
             </div>
 
             <div className="film-card__desc">
-              <FilmCardNav id={film.id}/>
+              <FilmCardNav/>
 
               <div className="film-rating">
                 <div className="film-rating__score">8,9</div>

@@ -13,8 +13,7 @@ import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 
 function GeneralScreen() {
-  const genres = useAppSelector((state) => state.films.genreList);
-  const films = useAppSelector((state) => state.films.films);
+  const films = useAppSelector((state) => state.filmList.films);
 
   return (
     <Fragment>
@@ -50,12 +49,9 @@ function GeneralScreen() {
       </section>
 
       <div className="page-content">
-
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenreList genres={genres}/>
-
+          <GenreList/>
           <FilmList/>
         </section>
         <Footer/>

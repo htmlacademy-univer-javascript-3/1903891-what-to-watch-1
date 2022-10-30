@@ -1,14 +1,9 @@
 import ItemGenreList from '../item-genre-list/item-genre-list';
-import {Genre} from '../../types/genre';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type GenreListProps = {
-  genres: Genre[];
-}
-
-function GenreList(props: GenreListProps) {
-  const {genres} = props;
-  const selectGenre = useAppSelector((state) => state.films.currentGenre);
+function GenreList() {
+  const genres = useAppSelector((state) => state.filmList.genreList);
+  const selectGenre = useAppSelector((state) => state.filmList.currentGenre);
   return (
     <ul className="catalog__genres-list">
       {genres.map((genreItem) => (

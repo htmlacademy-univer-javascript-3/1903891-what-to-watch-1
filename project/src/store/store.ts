@@ -1,20 +1,20 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {filmListStore} from './film-list/film-list.reducer';
 import {createAPI} from '../services/api';
+import {rootReducer} from './rootReducer';
+
 
 export const api = createAPI();
 
 export const store = configureStore({
-  reducer: {
-    films: filmListStore,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {
-        extraArgument: api
-      }
-    })
+        extraArgument: api,
+      },
+    }),
 });
+
 
 export default store;
 
