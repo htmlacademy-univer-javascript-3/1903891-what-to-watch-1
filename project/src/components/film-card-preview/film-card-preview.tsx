@@ -14,7 +14,7 @@ function FilmCardPreview(props: filmCardPreviewProp) {
   return (
     <Fragment>
       <div className="film-card__bg">
-        <img src={film.filmCardInfo.posterImage} alt={film.filmCardInfo.name}/>
+        <img src={film.backgroundImage} alt={film.name}/>
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -26,10 +26,10 @@ function FilmCardPreview(props: filmCardPreviewProp) {
 
       <div className="film-card__wrap">
         <div className="film-card__desc">
-          <h2 className="film-card__title">{film.filmCardInfo.name}</h2>
+          <h2 className="film-card__title">{film.name}</h2>
           <p className="film-card__meta">
-            <span className="film-card__genre">{film.filmCardInfo.genre}</span>
-            <span className="film-card__year">{film.filmCardInfo.released}</span>
+            <span className="film-card__genre">{film.genre}</span>
+            <span className="film-card__year">{film.released}</span>
           </p>
 
           <FilmCardButton film={film}/>

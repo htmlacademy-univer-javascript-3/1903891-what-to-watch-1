@@ -1,16 +1,10 @@
-import {Film} from '../../types/film';
-import {useParams} from 'react-router-dom';
 import {Fragment} from 'react';
 import {makeFilmRatingDescription} from '../../const';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type FilmOverviewProps = {
-  films: Film[]
-}
+function FilmScreenOverview() {
+  const film = useAppSelector((state) => state.filmCard.filmByID);
 
-function FilmScreenOverview(props: FilmOverviewProps) {
-  const {films} = props;
-  const {id} = useParams();
-  const film = films.find((el: Film) => el.id.toString() === id);
   return (
     <Fragment>
       <div className="film-rating">
@@ -22,13 +16,13 @@ function FilmScreenOverview(props: FilmOverviewProps) {
       </div>
 
       <div className="film-card__text">
-        <p>{film!.filmCardInfo.description}</p>
+        <p>{film!.description}</p>
 
-        <p className="film-card__director"><strong>Director: {film!.filmCardInfo.director}</strong></p>
+        <p className="film-card__director"><strong>Director: {film!.director}</strong></p>
 
         <p className="film-card__starring"><strong>Starring: </strong>
-          {film!.filmCardInfo.starring.map((star: string, index) => (
-            index === film!.filmCardInfo.starring.length - 1
+          {film!.starring.map((star: string, index) => (
+            index === film!.starring.length - 1
               ? <strong key={star}>{star}</strong>
               : <strong key={star}>{star}, </strong>
           ))} <strong>and other</strong>

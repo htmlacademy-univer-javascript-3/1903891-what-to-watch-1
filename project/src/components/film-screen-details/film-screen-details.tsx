@@ -1,26 +1,20 @@
-import {Film} from '../../types/film';
-import {useParams} from 'react-router-dom';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type FilmScreenDetailsProps = {
-  films: Film[]
-}
+function FilmScreenDetails() {
+  const film = useAppSelector((state) => state.filmCard.filmByID);
 
-function FilmScreenDetails(props: FilmScreenDetailsProps) {
-  const {films} = props;
-  const {id} = useParams();
-  const film = films.find((el: Film) => el.id.toString() === id);
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{film!.filmCardInfo.director}</span>
+          <span className="film-card__details-value">{film!.director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
 
-          {film!.filmCardInfo.starring.map((star: string, index) => (
-            index === film!.filmCardInfo.starring.length - 1
+          {film!.starring.map((star: string, index) => (
+            index === film!.starring.length - 1
               ? <span className="film-card__details-value">{star}</span>
               : <span>{star},<br/></span>
           ))}
@@ -34,11 +28,11 @@ function FilmScreenDetails(props: FilmScreenDetailsProps) {
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{film!.filmCardInfo.genre}</span>
+          <span className="film-card__details-value">{film!.genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{film!.filmCardInfo.released}</span>
+          <span className="film-card__details-value">{film!.released}</span>
         </p>
       </div>
     </div>

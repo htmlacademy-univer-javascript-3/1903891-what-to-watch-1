@@ -1,12 +1,19 @@
-import {FilmCardInfo} from './film-card-info';
-
 export type Film = {
-  id: number,
-  backgroundImage: string,
-  backgroundColor: string,
-  rating: number,
-  scoresCount: number,
-  runTime: number,
-  isFavorite: boolean,
-  filmCardInfo: FilmCardInfo,
+  'name': string,
+  'posterImage': string,
+  'previewImage': string,
+  'backgroundImage': string,
+  'backgroundColor': string,
+  'description': string,
+  'rating': number,
+  'scoresCount': number,
+  'director': string,
+  'starring': string[],
+  'runTime': number,
+  'genre': string,
+  'released': number,
+  'id': number,
+  'isFavorite': boolean,
+  'videoLink': string,
+  'previewVideoLink': string
 }

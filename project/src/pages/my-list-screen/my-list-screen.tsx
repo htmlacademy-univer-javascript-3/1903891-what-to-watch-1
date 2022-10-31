@@ -3,13 +3,11 @@ import Logo from '../../components/logo/logo';
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import {Film} from '../../types/film';
 import FilmCard from '../../components/film-card/film-card';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type MyListScreenProps = {
-  films: Film[],
-}
 
-function MyListScreen(props: MyListScreenProps) {
-  const {films} = props;
+function MyListScreen() {
+  const films = useAppSelector((state) => state.filmList.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

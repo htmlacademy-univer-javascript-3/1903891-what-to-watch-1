@@ -1,33 +1,58 @@
-import {createReducer} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 
-import {FILMS} from '../../mocks/FILMS';
-import {changeGenreAction, getFilterFilmsByGenre} from './film-list.action';
+import {getFilterFilmsByGenre, getUniqGenreByFilms} from './film-list.action';
+import {NameSpace} from '../../const';
+import {Genre} from '../../types/genre';
+import {fetchQuestionAction} from '../api-actions';
 
 type FilmListState = {
-  readonly genre: string;
+  readonly genreList: Genre[]
+  readonly currentGenre: string;
   readonly filmsByGenre: Film[];
+  readonly films: Film[];
+  readonly isDataFilmListLoading: boolean
 };
 
-const FULL_FILM_LIST = FILMS;
 
 const initialState: FilmListState = {
-  genre: 'All genres',
-  filmsByGenre: FULL_FILM_LIST,
+  genreList: [],
+  currentGenre: 'All genres',
+  filmsByGenre: [],
+  films: [],
+  isDataFilmListLoading: true
 };
 
-export const filmListStore = createReducer(initialState, (builder) => {
-  builder
-    .addCase(changeGenreAction, (state, action) => {
+export const filmListStore = createSlice({
+  name: NameSpace.FilmList,
+  initialState,
+  reducers: {
+    changeGenreAction: (state, action) => {
       const newGenre = action.payload;
-      state.genre = newGenre;
-      if (newGenre === initialState.genre) {
-        state.filmsByGenre = initialState.filmsByGenre;
+      state.currentGenre = newGenre;
+      if (newGenre === 'All genres') {
+        state.filmsByGenre = state.films;
       } else {
-        state.filmsByGenre = getFilterFilmsByGenre(newGenre, FULL_FILM_LIST);
+        if (state.films !== undefined) {
+          state.filmsByGenre = getFilterFilmsByGenre(newGenre, state.films);
+        }
       }
-    });
-  // .addCase(getFilmsByGenreAction, (state) => {
-  //   state.filmsByGenre = getFilterFilmsByGenre(state.genre, FULL_FILM_LIST);
-  // });
+    }
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchQuestionAction.pending, (state, action) => {
+        state.isDataFilmListLoading = true;
+      })
+      .addCase(fetchQuestionAction.fulfilled, (state, action) => {
+        state.films = action.payload;
+        state.filmsByGenre = state.films;
+        if (state.films !== undefined) {
+          state.genreList = getUniqGenreByFilms(state.films);
+        }
+        state.isDataFilmListLoading = false;
+      });
+  }
 });
+
+export const {changeGenreAction} = filmListStore.actions;

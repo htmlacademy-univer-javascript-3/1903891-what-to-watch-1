@@ -1,3 +1,4 @@
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -15,6 +16,22 @@ export enum AppRoute {
   NotFoundPage = 'notFoundPage',
 }
 
+export enum FilmCardInfo {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}
+
+export enum APIRoute {
+  Films = '/films',
+  Comments = '/comments'
+}
+
+export enum NameSpace {
+  FilmList = 'filmList',
+  FilmCard = 'filmCard',
+  PageInfo = 'dataPage'
+}
 
 export function makeFilmRatingDescription(rating: number): string {
   if (rating >= 0 && rating < 3) {

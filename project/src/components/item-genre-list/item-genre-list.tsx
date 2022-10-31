@@ -1,5 +1,5 @@
 import {useAppDispatch} from '../../hooks/hooks-toolkit';
-import {changeGenreAction} from '../../store/film-list/film-list.action';
+import {changeGenreAction} from '../../store/film-list/film-list.reducer';
 
 type ItemGenreListProps = {
   genre: string;
@@ -13,6 +13,7 @@ function ItemGenreList(props: ItemGenreListProps,) {
   const handlerClick = () => {
     dispatch(changeGenreAction(genre));
   };
+
   return (
     <li className={`catalog__genres-item ${active ? 'catalog__genres-item--active' : ''}`}>
       <div className="catalog__genres-link" onClick={handlerClick}>{genre}</div>

@@ -8,17 +8,18 @@ import FilmCardButton from '../../components/film-card-button/film-card-button';
 import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import FilmList from '../../components/film-list/film-list';
-import {Film} from '../../types/film';
 import GenreList from '../../components/genre-list/genre-list';
-import {Genre} from '../../types/genre';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type GeneralScreenProps = {
-  films: Film[],
-  genres: Genre[]
-}
 
-function GeneralScreen(props: GeneralScreenProps) {
-  const {films, genres} = props;
+function GeneralScreen() {
+  const films = useAppSelector((state) => state.filmList.films);
+  const isDataFilmListLoading = useAppSelector((state) => state.filmList.isDataFilmListLoading);
+
+  if (isDataFilmListLoading) {
+    return (<LoadingScreen/>);
+  }
   return (
     <Fragment>
       <section className="film-card">
@@ -53,12 +54,9 @@ function GeneralScreen(props: GeneralScreenProps) {
       </section>
 
       <div className="page-content">
-
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenreList genres={genres}/>
-
+          <GenreList/>
           <FilmList/>
         </section>
         <Footer/>

@@ -2,24 +2,21 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import Logo from '../../components/logo/logo';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import {Link, useParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {Film} from '../../types/film';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type ReviewScreenProps = {
-  films: Film[]
-}
+function ReviewScreen() {
+  // const {id} = useParams();
+  // store.dispatch(getFilmByID(id));
+  const film = useAppSelector((state) => state.filmCard.filmByID);
 
-function ReviewScreen(props: ReviewScreenProps) {
-  const {films} = props;
-  const {id} = useParams();
-  const film = films.find((el: Film) => el.id.toString() === id);
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film!.filmCardInfo.posterImage} alt={film!.filmCardInfo.name}/>
+          <img src={film!.posterImage} alt={film!.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -27,7 +24,7 @@ function ReviewScreen(props: ReviewScreenProps) {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/" className="breadcrumbs__link">{film!.filmCardInfo.name}</Link>
+                <Link to="/" className="breadcrumbs__link">{film!.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
