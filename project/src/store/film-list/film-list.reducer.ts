@@ -1,16 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 
-import {getFilterFilmsByGenre, getUniqGenreByFilms, loadFilms} from './film-list.action';
-import {AuthorizationStatus, NameSpace} from '../../const';
+import {getFilterFilmsByGenre, getUniqGenreByFilms} from './film-list.action';
+import {NameSpace} from '../../const';
 import {Genre} from '../../types/genre';
+import {fetchQuestionAction} from '../api-actions';
 
 type FilmListState = {
   readonly genreList: Genre[]
   readonly currentGenre: string;
   readonly filmsByGenre: Film[];
   readonly films: Film[];
-  readonly authorizationStatus: AuthorizationStatus;
+  readonly isDataFilmListLoading: boolean
 };
 
 
@@ -19,7 +20,7 @@ const initialState: FilmListState = {
   currentGenre: 'All genres',
   filmsByGenre: [],
   films: [],
-  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataFilmListLoading: true
 };
 
 export const filmListStore = createSlice({
@@ -32,16 +33,24 @@ export const filmListStore = createSlice({
       if (newGenre === 'All genres') {
         state.filmsByGenre = state.films;
       } else {
-        state.filmsByGenre = getFilterFilmsByGenre(newGenre, state.films);
+        if (state.films !== undefined) {
+          state.filmsByGenre = getFilterFilmsByGenre(newGenre, state.films);
+        }
       }
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(loadFilms, (state, action) => {
+      .addCase(fetchQuestionAction.pending, (state, action) => {
+        state.isDataFilmListLoading = true;
+      })
+      .addCase(fetchQuestionAction.fulfilled, (state, action) => {
         state.films = action.payload;
         state.filmsByGenre = state.films;
-        state.genreList = getUniqGenreByFilms(state.films);
+        if (state.films !== undefined) {
+          state.genreList = getUniqGenreByFilms(state.films);
+        }
+        state.isDataFilmListLoading = false;
       });
   }
 });

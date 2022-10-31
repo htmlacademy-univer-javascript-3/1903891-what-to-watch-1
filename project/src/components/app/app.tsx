@@ -8,9 +8,6 @@ import ReviewScreen from '../../pages/review-screen/review-screen';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundPage from '../not-found-page/not-found-page';
 import FilmScreen from '../../pages/film-screen/film-screen';
-import FilmScreenOverview from '../film-screen-overview/film-screen-overview';
-import FilmScreenDetails from '../film-screen-details/film-screen-details';
-import FilmScreenReviews from '../film-screen-reviews/film-screen-reviews';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 
 
@@ -27,7 +24,7 @@ function App(): JSX.Element {
         }
         />
         <Route path={AppRoute.FilmsList}>
-          <Route path={':id'} element={<FilmScreen/>} />
+          <Route path={':id'} element={<FilmScreen/>}/>
           <Route path={`:id${AppRoute.AddReview}`} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <ReviewScreen/>

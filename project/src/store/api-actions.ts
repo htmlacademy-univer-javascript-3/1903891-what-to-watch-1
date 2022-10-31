@@ -3,19 +3,17 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, RootState} from './store';
 import {AxiosInstance} from 'axios';
 import {APIRoute} from '../const';
-import {loadFilms} from './film-list/film-list.action';
 import {Comment} from '../types/comment';
 import {loadCommentsByID, loadFilmByID} from './film-card/film-card.action';
 
-export const fetchQuestionAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch,
+export const fetchQuestionAction = createAsyncThunk<Film[], undefined, {
   state: RootState,
   extra: AxiosInstance
 }>(
   'data/fetchQuestions',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Film[]>(APIRoute.Films);
-    dispatch(loadFilms(data));
+    return data;
   },
 );
 

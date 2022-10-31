@@ -1,7 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 import {Genre} from '../../types/genre';
-import {Comment} from '../../types/comment';
 
 export const FilmListAction = {
   CHANGE_GENRE: 'CHANGE_GENRE',
@@ -14,7 +13,7 @@ export function getFilterFilmsByGenre(genre: string, filmList: Film[]): Film[] {
   return filmList.filter((filmItem) => filmItem.genre === genre);
 }
 
-export const loadFilms = createAction<Film[]>('data/loadFilms');
+//export const loadFilms = createAction<Film[]>('data/loadFilms');
 
 export function getUniqGenreByFilms(filmList: Film[]): Genre[] {
   const genreFilmList: string[] = [];

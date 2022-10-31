@@ -1,0 +1,25 @@
+@keyframes donut-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper-donat {
+  margin-top: 4rem;
+}
+
+.donut {
+  display: block;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #7983ff;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  animation: donut-spin 1.2s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

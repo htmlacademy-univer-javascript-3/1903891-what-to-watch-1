@@ -10,11 +10,16 @@ import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
 function GeneralScreen() {
   const films = useAppSelector((state) => state.filmList.films);
+  const isDataFilmListLoading = useAppSelector((state) => state.filmList.isDataFilmListLoading);
 
+  if (isDataFilmListLoading) {
+    return (<LoadingScreen/>);
+  }
   return (
     <Fragment>
       <section className="film-card">

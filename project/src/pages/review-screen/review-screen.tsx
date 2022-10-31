@@ -2,11 +2,9 @@ import HeaderLoginIn from '../../components/header-login-in/header-login-in';
 import Logo from '../../components/logo/logo';
 
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
-import {Link, useParams} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
-import store from '../../store/store';
-import {getFilmByID} from '../../store/api-actions';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function ReviewScreen() {

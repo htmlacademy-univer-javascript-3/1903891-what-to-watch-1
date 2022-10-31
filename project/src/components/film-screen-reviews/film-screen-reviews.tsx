@@ -9,7 +9,6 @@ type GetTwoArrayComments = {
 
 function getTwoArrayComments(arrayComments: Comment[]): [GetTwoArrayComments, GetTwoArrayComments] {
   const lengthArray = Math.ceil(arrayComments.length / 2);
-  console.log(lengthArray);
   const firstArrayComment = arrayComments.slice(0, lengthArray);
   const secondArrayComment = arrayComments.slice(lengthArray);
   return [{commentArray: firstArrayComment, id: 1}, {commentArray: secondArrayComment, id: 2}];

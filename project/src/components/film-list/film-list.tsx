@@ -3,7 +3,6 @@ import {Film} from '../../types/film';
 import FilmCard from '../film-card/film-card';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 import {Fragment, useEffect, useState} from 'react';
-import {stat} from 'fs';
 
 function getCountPageFilms(countFilms: Film[]): number {
   if (countFilms.length > 8) {

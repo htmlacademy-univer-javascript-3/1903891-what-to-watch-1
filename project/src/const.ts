@@ -1,5 +1,3 @@
-import FilmScreenOverview from './components/film-screen-overview/film-screen-overview';
-import FilmScreenReviews from './components/film-screen-reviews/film-screen-reviews';
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -32,6 +30,7 @@ export enum APIRoute {
 export enum NameSpace {
   FilmList = 'filmList',
   FilmCard = 'filmCard',
+  PageInfo = 'dataPage'
 }
 
 export function makeFilmRatingDescription(rating: number): string {
