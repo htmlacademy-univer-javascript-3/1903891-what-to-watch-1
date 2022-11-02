@@ -6,13 +6,14 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import ScrollTopOnMount from './components/scroll-top-on-mount/scroll-top-on-mount';
 import {store} from './store/store';
-import {fetchQuestionAction} from './store/api-actions';
+import {checkAuthAction, fetchQuestionAction} from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 store.dispatch(fetchQuestionAction());
+store.dispatch(checkAuthAction());
 
 root.render(
   <React.StrictMode>

@@ -19,12 +19,12 @@ function getCountPageFilms(countFilms: Film[]): number {
 function FilmList() {
   const films = useAppSelector((state) => state.filmList.filmsByGenre);
   const [filmsArray, setFilmsArray] = useState(films);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   let countPage = getCountPageFilms(films);
 
   useEffect(() => {
     setFilmsArray(films.slice(0, 8));
-    setCurrentPage(0);
+    setCurrentPage(1);
     countPage = getCountPageFilms(films);
   }, [films]);
 

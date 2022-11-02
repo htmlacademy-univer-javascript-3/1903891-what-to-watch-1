@@ -1,17 +1,27 @@
-import Avatar from '../../img/avatar.jpg';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function HeaderLoginIn() {
+  const avatar = useAppSelector((state) => state.dataPage.avatarUrl);
+  const authorizationStatus = useAppSelector((state) => state.dataPage.authorizationStatus);
+
   return (
     <ul className="user-block">
       <li className="user-block__item">
-        <div className="user-block__avatar">
-          <img src={Avatar} alt="User avatar" width="63" height="63"/>
-        </div>
+        {
+          avatar !== null &&
+          <Link to={AppRoute.MyList} className="user-block__avatar">
+            <img src={avatar} alt="User avatar" width="63" height="63"/>
+          </Link>
+        }
       </li>
       <li className="user-block__item">
-        <Link to={AppRoute.Login} className="user-block__link">Sign out</Link>
+        {
+          authorizationStatus !== AuthorizationStatus.Auth ?
+            <Link to={AppRoute.Login} className="user-block__link">Sign In</Link> :
+            <Link to="/" className="user-block__link">Sign Out</Link>
+        }
       </li>
     </ul>
   );
