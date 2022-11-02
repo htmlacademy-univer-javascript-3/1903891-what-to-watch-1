@@ -1,4 +1,3 @@
-
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -24,7 +23,8 @@ export enum FilmCardInfo {
 
 export enum APIRoute {
   Films = '/films',
-  Comments = '/comments'
+  Comments = '/comments',
+  Login = '/login',
 }
 
 export enum NameSpace {
