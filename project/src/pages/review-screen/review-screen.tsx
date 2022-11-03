@@ -8,15 +8,13 @@ import CommentSubmissionForm from '../../components/comment-submission-form/comm
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
 function ReviewScreen() {
-  // const {id} = useParams();
-  // store.dispatch(getFilmByID(id));
   const film = useAppSelector((state) => state.filmCard.filmByID);
 
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film!.posterImage} alt={film!.name}/>
+          <img src={film?.backgroundImage} alt={film!.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -36,7 +34,7 @@ function ReviewScreen() {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+          <img src={film?.posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
         </div>
       </div>
 

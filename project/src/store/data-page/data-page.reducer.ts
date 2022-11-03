@@ -1,7 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {AuthorizationStatus, NameSpace} from '../../const';
+import {AppRoute, AuthorizationStatus, NameSpace} from '../../const';
 import {checkAuthAction, loginAction} from '../api-actions';
+import {saveToken} from '../../services/token';
+import {useNavigate} from 'react-router-dom';
 
 type DataPageState = {
   readonly authorizationStatus: AuthorizationStatus;
@@ -29,15 +31,19 @@ export const dataPageStore = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.fulfilled, (state) => {
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.avatarUrl = action.payload.avatarUrl;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
-        state.avatarUrl = action.payload;
+        state.avatarUrl = action.payload.avatarUrl;
+        saveToken(action.payload.token);
+        const navigate = useNavigate();
+        navigate(AppRoute.MyList);
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;

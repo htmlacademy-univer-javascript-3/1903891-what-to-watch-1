@@ -23,11 +23,8 @@ function FilmScreen() {
   const tabsOnCard = useAppSelector((state) => state.filmCard.tabsOnCard);
   const film = useAppSelector((state) => state.filmCard.filmByID);
   const films = useAppSelector((state) => state.filmList.films);
+  const similarFilmsByGenre = useAppSelector((state) => state.filmCard.similarFilmsByID).slice(0, 4);
 
-  let similarFilmsByGenre;
-  if (film !== undefined) {
-    similarFilmsByGenre = films.filter((filmItem: Film) => filmItem.id !== film.id && filmItem.genre === film.genre).slice(0, 4);
-  }
   return (
     <Fragment>
       <section className="film-card film-card--full">
@@ -42,9 +39,7 @@ function FilmScreen() {
 
                 <div className="film-card__desc">
                   <FilmCardNav/>
-                  {
-                    FilmCardInfoFilmScreen[tabsOnCard]
-                  }
+                  {FilmCardInfoFilmScreen[tabsOnCard]}
                 </div>
               </div>
             </div>

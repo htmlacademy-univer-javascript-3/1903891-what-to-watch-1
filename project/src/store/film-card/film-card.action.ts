@@ -10,4 +10,6 @@ export const loadFilmByID = createAction<Film>('data/getFilmByID');
 
 export const loadCommentsByID = createAction<Comment[]>('data/getCommentsByID');
 
+export const loadSimilarFilmsByID = createAction<Film[]>('data/getSimilarFilmsByID');
+
 export const getFilmsByGenreAction = createAction(FilmCardAction.CHANGE_TABS_CARD, (type: any) => ({payload: type}));

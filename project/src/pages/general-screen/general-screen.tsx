@@ -1,4 +1,4 @@
-import {Fragment} from 'react';
+import {Fragment, useEffect} from 'react';
 
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
@@ -9,13 +9,19 @@ import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
 import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
-import {useAppSelector} from '../../hooks/hooks-toolkit';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {setFilmDefault} from '../../store/film-card/film-card.reducer';
 
 
 function GeneralScreen() {
   const films = useAppSelector((state) => state.filmList.films);
   const isDataFilmListLoading = useAppSelector((state) => state.filmList.isDataFilmListLoading);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setFilmDefault(films[0]));
+  },);
 
   if (isDataFilmListLoading) {
     return (<LoadingScreen/>);
@@ -47,7 +53,7 @@ function GeneralScreen() {
                 <span className="film-card__year">2014</span>
               </p>
 
-              <FilmCardButton film={films[0]}/>
+              <FilmCardButton/>
             </div>
           </div>
         </div>

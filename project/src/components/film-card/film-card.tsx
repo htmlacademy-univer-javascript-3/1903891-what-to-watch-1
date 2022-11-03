@@ -3,7 +3,7 @@ import {Film} from '../../types/film';
 import {AppRoute, FilmCardInfo} from '../../const';
 import PreviewVideoPlayer from '../video-player/preview-video-player';
 import {useState} from 'react';
-import {getCommentsByID, getFilmByID} from '../../store/api-actions';
+import {getCommentsByID, getFilmByID, getSimilarFilmsByID} from '../../store/api-actions';
 import store from '../../store/store';
 import {useAppDispatch} from '../../hooks/hooks-toolkit';
 import {changeTabsCard} from '../../store/film-card/film-card.reducer';
@@ -31,10 +31,13 @@ function FilmCard(props: FilmCardProps) {
       .then(() => {
         store.dispatch(getCommentsByID(film.id))
           .then(() => {
-            dispatch(changeTabsCard(FilmCardInfo.Overview));
-            navigate(`${AppRoute.FilmsList}/${film.id}`);
+            store.dispatch(getSimilarFilmsByID(film.id))
+              .then(() => {
+                dispatch(changeTabsCard(FilmCardInfo.Overview));
+                navigate(`${AppRoute.FilmsList}/${film.id}`);
+              })
           });
-
+        store.dispatch(getSimilarFilmsByID(film.id))
       });
   }
 
