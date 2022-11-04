@@ -1,5 +1,5 @@
 export type NewCommentData = {
-  id: number,
+  id: number | undefined,
   comment: string,
-  rating: number
+  rating: number | null
 }

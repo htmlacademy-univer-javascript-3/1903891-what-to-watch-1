@@ -1,17 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 
-import {FilmCardInfo, NameSpace} from '../../const';
+import {AppRoute, FilmCardInfo, NameSpace} from '../../const';
 import {Comment} from '../../types/comment';
 import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card.action';
+import {postNewCommentsByID} from '../api-actions';
+import {useNavigate} from 'react-router-dom';
 
 type FilmCardState = {
   readonly filmByID: Film | undefined,
   readonly commentsByID: Comment[],
   readonly tabsOnCard: FilmCardInfo,
   readonly similarFilmsByID: Film[],
-  readonly ratingFilms: number,
-  readonly newComment: string
+  readonly ratingFilms: number | null,
+  readonly isDisabledFormComment: boolean
 };
 
 
@@ -20,8 +22,8 @@ const initialState: FilmCardState = {
   commentsByID: [],
   tabsOnCard: FilmCardInfo.Overview,
   similarFilmsByID: [],
-  ratingFilms: 0,
-  newComment: '',
+  ratingFilms: null,
+  isDisabledFormComment: false,
 };
 
 export const filmCardStore = createSlice({
@@ -36,9 +38,6 @@ export const filmCardStore = createSlice({
     },
     setRatingFilms: (state, action) => {
       state.ratingFilms = action.payload;
-    },
-    setNewComment: (state, action) => {
-      state.newComment = action.payload;
     }
   },
   extraReducers(builder) {
@@ -51,8 +50,18 @@ export const filmCardStore = createSlice({
       })
       .addCase(loadSimilarFilmsByID, (state, action) => {
         state.similarFilmsByID = action.payload;
+      })
+      .addCase(postNewCommentsByID.fulfilled, (state) => {
+        state.isDisabledFormComment = false;
+        if (state.filmByID !== undefined) {
+          const navigate = useNavigate();
+          navigate(`${AppRoute.FilmsList}/${state?.filmByID.id}`);
+        }
+      })
+      .addCase(postNewCommentsByID.rejected, (state) => {
+        state.isDisabledFormComment = true;
       });
   }
 });
 
-export const {changeTabsCard, setFilmDefault} = filmCardStore.actions;
+export const {changeTabsCard, setFilmDefault, setRatingFilms} = filmCardStore.actions;

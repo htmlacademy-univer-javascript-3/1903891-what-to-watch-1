@@ -35,9 +35,9 @@ function FilmCard(props: FilmCardProps) {
               .then(() => {
                 dispatch(changeTabsCard(FilmCardInfo.Overview));
                 navigate(`${AppRoute.FilmsList}/${film.id}`);
-              })
+              });
           });
-        store.dispatch(getSimilarFilmsByID(film.id))
+        store.dispatch(getSimilarFilmsByID(film.id));
       });
   }
 

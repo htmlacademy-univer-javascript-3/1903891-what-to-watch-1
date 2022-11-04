@@ -50,9 +50,9 @@ export const postNewCommentsByID = createAsyncThunk<void, NewCommentData, {
   state: RootState,
   extra: AxiosInstance,
 }>(
-  'comment/postNewCommentsByID',
+  'comments/postNewCommentsByID',
   async ({id, comment, rating}, {dispatch, extra: api}) => {
-    await api.post<Comment>(`${APIRoute.Comments}/${id}`, {
+    await api.post<any>(`${APIRoute.Comments}/${id}`, {
       comment: comment,
       rating: rating
     });
