@@ -1,21 +1,29 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 
-import {FilmCardInfo, NameSpace} from '../../const';
+import {AppRoute, FilmCardInfo, NameSpace} from '../../const';
 import {Comment} from '../../types/comment';
-import {loadCommentsByID, loadFilmByID} from './film-card.action';
+import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card.action';
+import {postNewCommentsByID} from '../api-actions';
+import {useNavigate} from 'react-router-dom';
 
 type FilmCardState = {
   readonly filmByID: Film | undefined,
   readonly commentsByID: Comment[],
-  readonly tabsOnCard: FilmCardInfo
+  readonly tabsOnCard: FilmCardInfo,
+  readonly similarFilmsByID: Film[],
+  readonly ratingFilms: number | null,
+  readonly isDisabledFormComment: boolean
 };
 
 
 const initialState: FilmCardState = {
   filmByID: undefined,
   commentsByID: [],
-  tabsOnCard: FilmCardInfo.Overview
+  tabsOnCard: FilmCardInfo.Overview,
+  similarFilmsByID: [],
+  ratingFilms: null,
+  isDisabledFormComment: false,
 };
 
 export const filmCardStore = createSlice({
@@ -24,6 +32,12 @@ export const filmCardStore = createSlice({
   reducers: {
     changeTabsCard: (state, action) => {
       state.tabsOnCard = action.payload;
+    },
+    setFilmDefault: (state, action) => {
+      state.filmByID = action.payload;
+    },
+    setRatingFilms: (state, action) => {
+      state.ratingFilms = action.payload;
     }
   },
   extraReducers(builder) {
@@ -33,8 +47,21 @@ export const filmCardStore = createSlice({
       })
       .addCase(loadCommentsByID, (state, action) => {
         state.commentsByID = action.payload;
+      })
+      .addCase(loadSimilarFilmsByID, (state, action) => {
+        state.similarFilmsByID = action.payload;
+      })
+      .addCase(postNewCommentsByID.fulfilled, (state) => {
+        state.isDisabledFormComment = false;
+        if (state.filmByID !== undefined) {
+          const navigate = useNavigate();
+          navigate(`${AppRoute.FilmsList}/${state?.filmByID.id}`);
+        }
+      })
+      .addCase(postNewCommentsByID.rejected, (state) => {
+        state.isDisabledFormComment = true;
       });
   }
 });
 
-export const {changeTabsCard} = filmCardStore.actions;
+export const {changeTabsCard, setFilmDefault, setRatingFilms} = filmCardStore.actions;

@@ -32,7 +32,7 @@ function FilmCardPreview(props: filmCardPreviewProp) {
             <span className="film-card__year">{film.released}</span>
           </p>
 
-          <FilmCardButton film={film}/>
+          <FilmCardButton/>
         </div>
       </div>
     </Fragment>

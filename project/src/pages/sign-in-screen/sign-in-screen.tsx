@@ -79,7 +79,13 @@ function SignInScreen() {
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" disabled={!isPasswordValid || !isEmailValid || ((loginRef.current || passwordRef.current) === null)} type="submit">Sign in</button>
+            <button
+              className="sign-in__btn"
+              disabled={!isPasswordValid || !isEmailValid || ((loginRef.current || passwordRef.current) === null)}
+              type="submit"
+            >
+              Sign in
+            </button>
           </div>
         </form>
       </div>

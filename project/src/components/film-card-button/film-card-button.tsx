@@ -1,15 +1,12 @@
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
-import {Film} from '../../types/film';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-type filmCardProp = {
-  film: Film
-};
-
-function FilmCardButton(props: filmCardProp) {
-  const {film} = props;
+function FilmCardButton() {
+  const film = useAppSelector((state) => state.filmCard.filmByID);
+  const statusUser = useAppSelector((state) => state.dataPage.authorizationStatus);
 
   return (
     <div className="film-card__buttons">
@@ -26,7 +23,10 @@ function FilmCardButton(props: filmCardProp) {
         <span>My list</span>
         <span className="film-card__count">9</span>
       </Link>
-      <Link to={`${AppRoute.FilmsList}/${film?.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+      {
+        statusUser === AuthorizationStatus.Auth &&
+        < Link to={`${AppRoute.FilmsList}/${film?.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+      }
     </div>
   );
 }
