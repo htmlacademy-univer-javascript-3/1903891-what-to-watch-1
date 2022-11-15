@@ -1,12 +1,8 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {Film} from '../../types/film';
-import {AppRoute, FilmCardInfo} from '../../const';
+import {AppRoute} from '../../const';
 import PreviewVideoPlayer from '../video-player/preview-video-player';
-import {useState} from 'react';
-import {getCommentsByID, getFilmByID, getSimilarFilmsByID} from '../../store/api-actions';
-import store from '../../store/store';
-import {useAppDispatch} from '../../hooks/hooks-toolkit';
-import {changeTabsCard} from '../../store/film-card/film-card.reducer';
+import {memo, useState} from 'react';
 
 type FilmCardProps = {
   film: Film,
@@ -16,7 +12,6 @@ function FilmCard(props: FilmCardProps) {
   const {film} = props;
   const [activeFilmCard, setActiveFilmCard] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   function onMouseOverHandler() {
     setActiveFilmCard(true);
@@ -27,18 +22,7 @@ function FilmCard(props: FilmCardProps) {
   }
 
   function onClickCard() {
-    store.dispatch(getFilmByID(film.id))
-      .then(() => {
-        store.dispatch(getCommentsByID(film.id))
-          .then(() => {
-            store.dispatch(getSimilarFilmsByID(film.id))
-              .then(() => {
-                dispatch(changeTabsCard(FilmCardInfo.Overview));
-                navigate(`${AppRoute.FilmsList}/${film.id}`);
-              });
-          });
-        store.dispatch(getSimilarFilmsByID(film.id));
-      });
+    navigate(`${AppRoute.FilmsList}/${film.id}`);
   }
 
   return (
@@ -57,4 +41,4 @@ function FilmCard(props: FilmCardProps) {
   );
 }
 
-export default FilmCard;
+export default memo(FilmCard);

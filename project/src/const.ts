@@ -23,12 +23,20 @@ export enum APIRoute {
   Films = '/films',
   Comments = '/comments',
   Login = '/login',
+  Logout = '/logout',
+  FavoriteFilms = 'favorite'
 }
 
 export enum NameSpace {
   FilmList = 'filmList',
   FilmCard = 'filmCard',
-  PageInfo = 'dataPage'
+  PageInfo = 'dataPage',
+  UserStore = 'user'
+}
+
+export enum FilmFavoriteStatus {
+  Delete = 0,
+  Add = 1
 }
 
 export function makeFilmRatingDescription(rating: number): string {

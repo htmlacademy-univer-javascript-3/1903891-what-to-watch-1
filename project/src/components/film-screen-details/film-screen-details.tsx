@@ -15,8 +15,8 @@ function FilmScreenDetails() {
 
           {film!.starring.map((star: string, index) => (
             index === film!.starring.length - 1
-              ? <span className="film-card__details-value">{star}</span>
-              : <span>{star},<br/></span>
+              ? <span key={star.toString()} className="film-card__details-value">{star}</span>
+              : <span key={star.toString()}>{star},<br/></span>
           ))}
         </p>
       </div>

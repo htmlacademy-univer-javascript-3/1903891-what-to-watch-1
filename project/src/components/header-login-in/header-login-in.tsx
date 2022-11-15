@@ -1,11 +1,15 @@
 import {Link, useNavigate} from 'react-router-dom';
+
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks/hooks-toolkit';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
+import {logoutAction} from '../../store/api-actions';
 
 function HeaderLoginIn() {
-  const avatar = useAppSelector((state) => state.dataPage.avatarUrl);
   const authorizationStatus = useAppSelector((state) => state.dataPage.authorizationStatus);
+  const avatar = useAppSelector((state) => state.dataPage.avatarUrl);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const onClickImgAvatar = () => {
     navigate(AppRoute.MyList);
   };
@@ -24,7 +28,12 @@ function HeaderLoginIn() {
         {
           authorizationStatus !== AuthorizationStatus.Auth ?
             <Link to={AppRoute.Login} className="user-block__link">Sign In</Link> :
-            <Link to="/" className="user-block__link">Sign Out</Link>
+            <Link to="/" onClick={(env) => {
+              env.stopPropagation();
+              dispatch(logoutAction());
+            }} className="user-block__link"
+            >Sign Out
+            </Link>
         }
       </li>
     </ul>

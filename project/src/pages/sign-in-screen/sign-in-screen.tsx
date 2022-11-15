@@ -1,5 +1,4 @@
 import {useAppDispatch} from '../../hooks/hooks-toolkit';
-import {useNavigate} from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
@@ -14,12 +13,9 @@ function SignInScreen() {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData)).then(() => {
-      navigate('/');
-    });
+    dispatch(loginAction(authData));
   };
 
   const onHandlerSignIn = (e: FormEvent) => {
@@ -89,7 +85,6 @@ function SignInScreen() {
           </div>
         </form>
       </div>
-
       <Footer/>
     </div>
   );

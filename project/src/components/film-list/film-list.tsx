@@ -12,29 +12,29 @@ function getCountPageFilms(countFilms: Film[]): number {
       return Math.floor(countFilms.length / 8);
     }
   } else {
-    return 0;
+    return 1;
   }
 }
 
 function FilmList() {
-  const films = useAppSelector((state) => state.filmList.filmsByGenre);
-  const [filmsArray, setFilmsArray] = useState(films);
+  const filmsByGenre = useAppSelector((state) => state.filmList.filmsByGenre);
+  const [filmsArray, setFilmsArray] = useState(filmsByGenre);
   const [currentPage, setCurrentPage] = useState(1);
-  let countPage = getCountPageFilms(films);
+  let countPage = getCountPageFilms(filmsByGenre);
 
   useEffect(() => {
-    setFilmsArray(films.slice(0, 8));
+    setFilmsArray(filmsByGenre.slice(0, 8));
     setCurrentPage(1);
-    countPage = getCountPageFilms(films);
-  }, [films]);
+    countPage = getCountPageFilms(filmsByGenre);
+  }, [filmsByGenre]);
 
   function handleClickCatalogButton() {
     if (currentPage + 1 === countPage) {
-      setFilmsArray(films);
+      setFilmsArray(filmsByGenre);
       setCurrentPage(currentPage + 1);
     } else if (currentPage + 1 !== countPage) {
       setCurrentPage(currentPage + 1);
-      setFilmsArray(films.slice(0, (currentPage + 1) * 8));
+      setFilmsArray(filmsByGenre.slice(0, (currentPage + 1) * 8));
     }
   }
 

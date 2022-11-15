@@ -1,4 +1,5 @@
 export type Film = {
+  'id': number,
   'name': string,
   'posterImage': string,
   'previewImage': string,
@@ -12,7 +13,6 @@ export type Film = {
   'runTime': number,
   'genre': string,
   'released': number,
-  'id': number,
   'isFavorite': boolean,
   'videoLink': string,
   'previewVideoLink': string

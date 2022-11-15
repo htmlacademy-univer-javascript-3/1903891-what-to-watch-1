@@ -1,8 +1,9 @@
+import {Link} from 'react-router-dom';
 import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
-import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector} from '../../hooks/hooks-toolkit';
+import { useAppSelector} from '../../hooks/hooks-toolkit';
+import ButtonMyList from '../button-myList/button-myList';
 
 function FilmCardButton() {
   const film = useAppSelector((state) => state.filmCard.filmByID);
@@ -16,16 +17,10 @@ function FilmCardButton() {
         </svg>
         <span>Play</span>
       </Link>
-      <Link to={`${AppRoute.MyList}`} className="btn btn--list film-card__button" type="button">
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref={`${SvgGeneralScreen}#add`}/>
-        </svg>
-        <span>My list</span>
-        <span className="film-card__count">9</span>
-      </Link>
+      <ButtonMyList/>
       {
         statusUser === AuthorizationStatus.Auth &&
-        < Link to={`${AppRoute.FilmsList}/${film?.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
+        <Link to={`${AppRoute.FilmsList}/${film?.id}${AppRoute.AddReview}`} className="btn film-card__button">Add review</Link>
       }
     </div>
   );

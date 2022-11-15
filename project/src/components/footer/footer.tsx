@@ -1,4 +1,5 @@
 import Logo from '../logo/logo';
+import './footer.css';
 
 function Footer() {
   return (

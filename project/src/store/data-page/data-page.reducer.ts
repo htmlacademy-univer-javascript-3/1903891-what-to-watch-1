@@ -1,9 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {AppRoute, AuthorizationStatus, NameSpace} from '../../const';
-import {checkAuthAction, loginAction} from '../api-actions';
-import {saveToken} from '../../services/token';
-import {useNavigate} from 'react-router-dom';
+import {AuthorizationStatus, NameSpace} from '../../const';
+import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
 
 type DataPageState = {
   readonly authorizationStatus: AuthorizationStatus;
@@ -11,11 +9,10 @@ type DataPageState = {
   readonly avatarUrl: string | null,
 };
 
-
 const initialState: DataPageState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoading: false,
-  avatarUrl: null
+  avatarUrl: null,
 };
 
 export const dataPageStore = createSlice({
@@ -24,34 +21,28 @@ export const dataPageStore = createSlice({
   reducers: {
     changeAuthorizationStatus: (state, action) => {
       state.authorizationStatus = action.payload;
-    },
-    putAvatarUrl: (state, action) => {
-      state.avatarUrl = action.payload;
     }
   },
   extraReducers(builder) {
     builder
       .addCase(checkAuthAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
         state.avatarUrl = action.payload.avatarUrl;
+        state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
-        state.authorizationStatus = AuthorizationStatus.Auth;
         state.avatarUrl = action.payload.avatarUrl;
-        saveToken(action.payload.token);
-        const navigate = useNavigate();
-        navigate(AppRoute.MyList);
+        state.authorizationStatus = AuthorizationStatus.Auth;
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+      })
+      .addCase(logoutAction.fulfilled, (state) => {
+        state.avatarUrl = null;
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
       });
-    // .addCase(logoutAction.fulfilled, (state, action) => {
-    //   state.authorizationStatus = AuthorizationStatus.NoAuth;
-    //   state.avatarUrl = null
-    // });
   }
 });
 

@@ -5,14 +5,14 @@ import {Film} from '../../types/film';
 import FilmCard from '../../components/film-card/film-card';
 import {useAppSelector} from '../../hooks/hooks-toolkit';
 
-
 function MyListScreen() {
-  const films = useAppSelector((state) => state.filmList.films);
+  const favoriteFilms = useAppSelector((state) => state.user.favoriteFilms);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo/>
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{favoriteFilms.length}</span></h1>
         <HeaderLoginIn/>
       </header>
 
@@ -20,7 +20,7 @@ function MyListScreen() {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <div className="catalog__films-list">
           {
-            films.map((filmItem: Film) => (
+            favoriteFilms.map((filmItem: Film) => (
               <FilmCard film={filmItem} key={filmItem.id}/>
             ))
           }
