@@ -6,6 +6,7 @@ import {AppRoute} from '../../const';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import {setRatingFilms} from '../../store/film-card/film-card.reducer';
+import {Fragment} from 'react';
 
 function ReviewScreen() {
   const film = useAppSelector((state) => state.filmCard.filmByID);
@@ -48,7 +49,7 @@ function ReviewScreen() {
             <div className="rating__stars">
               {
                 Array.from(Array(10), (_, index) => (
-                  <>
+                  <Fragment key={index}>
                     <input
                       className="rating__input"
                       id={`star-${index + 1}`}
@@ -58,7 +59,7 @@ function ReviewScreen() {
                       onInput={() => handleChooseNewRating(11 - (index + 1))}
                     />
                     <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
-                  </>
+                  </Fragment>
                 ))
               }
             </div>

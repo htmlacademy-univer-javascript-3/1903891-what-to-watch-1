@@ -1,11 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Film} from '../../types/film';
 
-import {AppRoute, FilmCardInfo, NameSpace} from '../../const';
+import {FilmCardInfo, NameSpace} from '../../const';
 import {Comment} from '../../types/comment';
 import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card.action';
 import {postNewCommentsByID} from '../api-actions';
-import {useNavigate} from 'react-router-dom';
 
 type FilmCardState = {
   readonly filmByID: Film | undefined,
@@ -51,12 +50,11 @@ export const filmCardStore = createSlice({
       .addCase(loadSimilarFilmsByID, (state, action) => {
         state.similarFilmsByID = action.payload;
       })
-      .addCase(postNewCommentsByID.fulfilled, (state) => {
+      .addCase(postNewCommentsByID.fulfilled, (state, action) => {
         state.isDisabledFormComment = false;
-        if (state.filmByID !== undefined) {
-          const navigate = useNavigate();
-          navigate(`${AppRoute.FilmsList}/${state?.filmByID.id}`);
-        }
+        // if (state.filmByID !== undefined) {
+        //   (redirectToRoute(`${AppRoute.FilmsList}/${state?.filmByID.id}`))
+        // }
       })
       .addCase(postNewCommentsByID.rejected, (state) => {
         state.isDisabledFormComment = true;
@@ -65,3 +63,6 @@ export const filmCardStore = createSlice({
 });
 
 export const {changeTabsCard, setFilmDefault, setRatingFilms} = filmCardStore.actions;
+
+
+//todo: как диспатчить отсюда

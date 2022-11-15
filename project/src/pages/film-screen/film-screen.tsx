@@ -1,50 +1,60 @@
-import {Fragment} from 'react';
+import {useParams} from 'react-router-dom';
+import {Fragment, memo, useEffect} from 'react';
 
 import Footer from '../../components/footer/footer';
-
 import {Film} from '../../types/film';
-import FilmCardNav from '../../components/film-card-nav/film-card-nav';
-import {Navigate} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {FilmCardInfo} from '../../const';
 import FilmCard from '../../components/film-card/film-card';
-import {useAppSelector} from '../../hooks/hooks-toolkit';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import FilmCardHero from '../../components/film-card-hero/film-card-hero';
-import FilmScreenOverview from '../../components/film-screen-overview/film-screen-overview';
-import FilmScreenReviews from '../../components/film-screen-reviews/film-screen-reviews';
-import FilmScreenDetails from '../../components/film-screen-details/film-screen-details';
+import {getCommentsByID, getFavoriteFilms, getFilmByID, getSimilarFilmsByID} from '../../store/api-actions';
+import {changeTabsCard} from '../../store/film-card/film-card.reducer';
+import NotFoundPage from '../../components/not-found-page/not-found-page';
+import DescriptionFilmsWithNav from '../../components/description-films-with-nav/description-films-with-nav';
 
-const FilmCardInfoFilmScreen = {
-  'Overview': <FilmScreenOverview/>,
-  'Details': <FilmScreenDetails/>,
-  'Reviews': <FilmScreenReviews/>
-};
 
 function FilmScreen() {
-  const tabsOnCard = useAppSelector((state) => state.filmCard.tabsOnCard);
+  const params = useParams();
+  const prodId = params.id;
+  const dispatch = useAppDispatch();
+
   const film = useAppSelector((state) => state.filmCard.filmByID);
   const films = useAppSelector((state) => state.filmList.films);
   const similarFilmsByGenre = useAppSelector((state) => state.filmCard.similarFilmsByID).slice(0, 4);
 
+  useEffect(() => {
+    const mounted = true;
+
+    if (mounted) {
+      dispatch(getFilmByID(prodId));
+      dispatch(getCommentsByID(prodId));
+      dispatch(getSimilarFilmsByID(prodId))
+        .then(() => {
+          dispatch(changeTabsCard(FilmCardInfo.Overview));
+        });
+      dispatch(getSimilarFilmsByID(prodId));
+      dispatch(getFavoriteFilms());
+    }
+  }, [prodId]);
+
+  if (!film) {
+    return <NotFoundPage/>;
+  }
+
   return (
     <Fragment>
       <section className="film-card film-card--full">
-        {film !== undefined ?
-          <>
-            <FilmCardHero film={film}/>
-            <div className="film-card__wrap film-card__translate-top">
-              <div className="film-card__info">
-                <div className="film-card__poster film-card__poster--big">
-                  <img src={film.posterImage} alt={film.name} width="218" height="327"/>
-                </div>
-
-                <div className="film-card__desc">
-                  <FilmCardNav/>
-                  {FilmCardInfoFilmScreen[tabsOnCard]}
-                </div>
-              </div>
+        <FilmCardHero film={film}/>
+        <div className="film-card__wrap film-card__translate-top">
+          <div className="film-card__info">
+            <div className="film-card__poster film-card__poster--big">
+              <img src={film.posterImage} alt={film.name} width="218" height="327"/>
             </div>
-          </>
-          : <Navigate to={AppRoute.NotFoundPage}/>}
+
+            <DescriptionFilmsWithNav/>
+          </div>
+        </div>
+
       </section>
 
       <div className="page-content">
@@ -64,4 +74,4 @@ function FilmScreen() {
   );
 }
 
-export default FilmScreen;
+export default memo(FilmScreen);
