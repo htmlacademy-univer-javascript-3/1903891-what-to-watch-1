@@ -1,8 +1,8 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {Film} from '../../types/film';
 import {AppRoute} from '../../const';
-import PreviewVideoPlayer from '../video-player/preview-video-player';
 import {memo, useState} from 'react';
+import VideoPlayer from '../video-player/video-player';
 
 type FilmCardProps = {
   film: Film,
@@ -29,9 +29,8 @@ function FilmCard(props: FilmCardProps) {
     <article onClick={onClickCard} className="small-film-card catalog__films-card" onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       <div className="small-film-card__image">
         {
-          activeFilmCard ? (<PreviewVideoPlayer videoLink={film.previewVideoLink} posterImage={film.posterImage} isSound={false}/>)
+          activeFilmCard ? (<VideoPlayer videoLink={film.previewVideoLink} posterImage={film.posterImage} isSound={false}/>)
             : (<img src={film.previewImage} alt={film.name} width="280" height="175"/>)
-
         }
       </div>
       <h3 className="small-film-card__title">

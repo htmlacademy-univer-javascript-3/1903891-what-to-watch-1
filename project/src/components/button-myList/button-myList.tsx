@@ -46,9 +46,9 @@ function ButtonMyList() {
   };
 
   return (
-    <div>
+    <>
       {
-        statusUser !== AuthorizationStatus.Auth ? (
+        statusUser !== AuthorizationStatus.Auth && (
           <Link to={`${AppRoute.Login}`} className="btn btn--list film-card__button" type="button">
             <svg viewBox="0 0 19 20" width="19" height="20">
               <use xlinkHref={`${SvgGeneralScreen}#add`}/>
@@ -56,25 +56,29 @@ function ButtonMyList() {
             <span>My list</span>
             {/*<span className="film-card__count">9</span>*/}
           </Link>
-        ) : (
-          <a
-            className="btn btn--list film-card__button"
-            type="button"
-            onClick={handleClickToggleStatusFavorite}
-          >
-            <svg viewBox="0 0 19 20" width="19" height="20">
-              {!isChosenFavorite ? (
-                <use xlinkHref={`${SvgGeneralScreen}#add`}/>
-              ) : (
-                <use xlinkHref={`${SvgGeneralScreen}#play-s`}/>
-              )}
-            </svg>
-            <span>My list</span>
-            <span className="film-card__count">{favoriteFilms.length}</span>
-          </a>
         )
       }
-    </div>
+      {statusUser === AuthorizationStatus.Auth && (
+        <a
+          className="btn btn--list film-card__button"
+          type="button"
+          onClick={handleClickToggleStatusFavorite}
+        >
+          {!isChosenFavorite
+            ? (
+              <svg viewBox="0 0 19 20" width="19" height="20">
+                <use xlinkHref={`${SvgGeneralScreen}#add`}/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 18 14" width="18" height="14">
+                <use xlinkHref={`${SvgGeneralScreen}#in-list`}/>
+              </svg>
+            )}
+          <span style={{display: 'block'}}>My list</span>
+          <span className="film-card__count">{favoriteFilms.length}</span>
+        </a>
+      )}
+    </>
   );
 }
 

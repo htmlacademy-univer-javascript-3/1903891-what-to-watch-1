@@ -1,12 +1,13 @@
 import {useEffect, useRef} from 'react';
+import FullVideoPlayer from '../full-video-player/full-video-player';
 
-type previewVideoPlayerProps = {
+type videoPlayerProps = {
   videoLink: string,
   posterImage: string,
-  isSound: boolean
+  isSound: boolean,
 }
 
-function PreviewVideoPlayer(props: previewVideoPlayerProps) {
+function VideoPlayer(props: videoPlayerProps) {
   const {videoLink, posterImage, isSound} = props;
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -22,9 +23,7 @@ function PreviewVideoPlayer(props: previewVideoPlayerProps) {
     <div>
       {isSound ?
         (
-          <video ref={videoRef} className="player__video" poster={posterImage}>
-            <source src={videoLink} type="video/mp4"/>
-          </video>
+          <FullVideoPlayer videoLink={videoLink} posterImage={posterImage}/>
         )
         : (
           <video ref={videoRef} className="player__video" poster={posterImage} muted>
@@ -35,4 +34,4 @@ function PreviewVideoPlayer(props: previewVideoPlayerProps) {
   );
 }
 
-export default PreviewVideoPlayer;
+export default VideoPlayer;

@@ -31,7 +31,8 @@ export enum NameSpace {
   FilmList = 'filmList',
   FilmCard = 'filmCard',
   PageInfo = 'dataPage',
-  UserStore = 'user'
+  UserStore = 'user',
+  PlayerStore = 'player'
 }
 
 export enum FilmFavoriteStatus {

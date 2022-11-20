@@ -12,7 +12,6 @@ import {changeTabsCard} from '../../store/film-card/film-card.reducer';
 import NotFoundPage from '../../components/not-found-page/not-found-page';
 import DescriptionFilmsWithNav from '../../components/description-films-with-nav/description-films-with-nav';
 
-
 function FilmScreen() {
   const params = useParams();
   const prodId = params.id;
