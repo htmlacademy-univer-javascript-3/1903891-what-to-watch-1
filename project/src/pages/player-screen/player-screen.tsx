@@ -1,44 +1,31 @@
 import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
 
-import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
-import {useAppSelector} from '../../hooks/hooks-toolkit';
-import PreviewVideoPlayer from '../../components/video-player/preview-video-player';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
+import VideoPlayer from '../../components/video-player/video-player';
+import ControlsVideo from '../../components/controls-video/controls-video';
+import {setFalseInIsPlayingVideo} from '../../store/player-store/player-store.reducer';
 
 function PlayerScreen() {
   const film = useAppSelector((state) => state.filmCard.filmByID);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const goBack = () => navigate(-1);
+
+  useEffect(() => () => {
+    dispatch(setFalseInIsPlayingVideo());
+  });
 
   return (
     <div className="player">
-      <PreviewVideoPlayer videoLink={film!.videoLink} posterImage={film!.backgroundImage} isSound/>
+      <VideoPlayer
+        videoLink={film!.videoLink}
+        posterImage={film!.backgroundImage}
+        isSound
+      />
       <button type="button" className="player__exit" onClick={goBack}>Exit</button>
-      <div className="player__controls">
-        <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value="30" max="100"/>
-            <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
-          </div>
-          <div className="player__time-value">{film!.runTime}</div>
-        </div>
-
-        <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref={`${SvgGeneralScreen}#play-s`}/>
-            </svg>
-            <span>Play</span>
-          </button>
-          <div className="player__name">Transpotting</div>
-
-          <button type="button" className="player__full-screen">
-            <svg viewBox="0 0 27 27" width="27" height="27">
-              <use xlinkHref={`${SvgGeneralScreen}#full-screen`}/>
-            </svg>
-            <span>Full screen</span>
-          </button>
-        </div>
-      </div>
+      <ControlsVideo/>
     </div>
   );
 }

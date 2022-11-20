@@ -26,6 +26,7 @@ function GeneralScreen() {
   if (isDataFilmListLoading) {
     return (<LoadingScreen/>);
   }
+
   return (
     <Fragment>
       <section className="film-card">

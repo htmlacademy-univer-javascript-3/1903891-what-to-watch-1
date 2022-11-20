@@ -20,7 +20,7 @@ function ReviewScreen() {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film?.backgroundImage} alt={film!.name}/>
+          <img src={film?.backgroundImage} alt={film?.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -28,7 +28,7 @@ function ReviewScreen() {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/" className="breadcrumbs__link">{film!.name}</Link>
+                <Link to="/" className="breadcrumbs__link">{film?.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to={AppRoute.AddReview} className="breadcrumbs__link">Add review</Link>
