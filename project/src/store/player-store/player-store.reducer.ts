@@ -21,11 +21,8 @@ export const playerStoreReducer = createSlice({
   name: NameSpace.PlayerStore,
   initialState,
   reducers: {
-    setNewStateIsPlaying: (state) => {
-      state.isPlaying = !state.isPlaying;
-    },
-    setFalseInIsPlayingVideo: (state) => {
-      state.isPlaying = false;
+    setNewStateIsPlaying: (state, action) => {
+      state.isPlaying = action.payload;
     },
     setCurrentTime: (state, action) => {
       state.currentToggler = action.payload.currentToggler;
@@ -39,7 +36,6 @@ export const playerStoreReducer = createSlice({
 
 export const {
   setNewStateIsPlaying,
-  setFalseInIsPlayingVideo,
   setCurrentTime,
   setNewStateIsFullScreen
 } = playerStoreReducer.actions;

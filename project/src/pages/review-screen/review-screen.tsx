@@ -1,19 +1,43 @@
 import HeaderLoginIn from '../../components/header-login-in/header-login-in';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import Logo from '../../components/logo/logo';
 import {AppRoute} from '../../const';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import {setRatingFilms} from '../../store/film-card/film-card.reducer';
-import {Fragment} from 'react';
+import {Fragment, useEffect} from 'react';
+import {getFavoriteFilms, getFilmByID} from '../../store/api-actions';
+import {setNewStateIsPlaying} from '../../store/player-store/player-store.reducer';
+import NotFoundPage from '../../components/not-found-page/not-found-page';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function ReviewScreen() {
+  const params = useParams();
+  const prodId = params.id;
   const film = useAppSelector((state) => state.filmCard.filmByID);
+  const isLoading = useAppSelector((state) => state.dataPage.isDataLoading);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const mounted = true;
+    if (mounted) {
+      dispatch(getFilmByID(prodId));
+      dispatch(getFavoriteFilms());
+    }
+    dispatch(setNewStateIsPlaying(false));
+  }, [prodId]);
 
   function handleChooseNewRating(rating: number) {
     dispatch(setRatingFilms(rating));
+  }
+
+  if (!film && isLoading) {
+    return <NotFoundPage/>;
+  }
+
+  if (!isLoading) {
+    return <LoadingScreen/>;
   }
 
   return (

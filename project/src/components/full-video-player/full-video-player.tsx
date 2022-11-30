@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import {setCurrentTime, setNewStateIsPlaying} from '../../store/player-store/player-store.reducer';
+import {CombinedElement, requestFullScreen} from '../../services/fullscreen-api';
 
 type videoPlayerProps = {
   videoLink: string,
@@ -16,18 +17,14 @@ function FullVideoPlayer(props: videoPlayerProps) {
 
   useEffect(() => {
     if (isFullVideo) {
-      if (videoRefFullVideo.current?.requestFullscreen) {
-        videoRefFullVideo.current?.requestFullscreen();
-      }
+      requestFullScreen(videoRefFullVideo.current as unknown as CombinedElement);
     }
-    // else if (videoRefFullVideo.current?.webkitRequestFullscreen) { /* Safari */
-    //   videoRefFullVideo.current?.webkitRequestFullscreen();
-    // } else if (videoRefFullVideo.current?.msRequestFullscreen) { /* IE11 */
-    //   videoRefFullVideo.current?.msRequestFullscreen();
-    // }
   }, [isFullVideo]);
 
   useEffect(() => {
+    // if(videoRefFullVideo.current?.readyState){
+    //   (isPlaying && videoRefFullVideo.current?.readyState === 4) ? videoRefFullVideo.current?.play() : videoRefFullVideo.current?.pause();
+    // }
     isPlaying ? videoRefFullVideo.current?.play() : videoRefFullVideo.current?.pause();
   }, [isPlaying]);
 
@@ -52,7 +49,7 @@ function FullVideoPlayer(props: videoPlayerProps) {
       className="player__video"
       poster={posterImage}
       onTimeUpdate={handlerTimeUpdate}
-      onCanPlay={() => dispatch(setNewStateIsPlaying())}
+      onCanPlayThrough={() => dispatch(setNewStateIsPlaying(true))}
     >
       <source src={videoLink} type="video/mp4"/>
     </video>

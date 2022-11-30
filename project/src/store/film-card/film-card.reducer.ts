@@ -63,6 +63,3 @@ export const filmCardStore = createSlice({
 });
 
 export const {changeTabsCard, setFilmDefault, setRatingFilms} = filmCardStore.actions;
-
-
-//todo: как диспатчить отсюда
