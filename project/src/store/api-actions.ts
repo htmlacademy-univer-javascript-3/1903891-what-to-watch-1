@@ -11,6 +11,7 @@ import {NewCommentData} from '../types/new-comment-data';
 import {dropToken, saveToken} from '../services/token';
 import {redirectToRoute} from './actions';
 import {FilmFavoriteListStatus} from '../types/film-list-favorite-status';
+import {toast} from 'react-toastify';
 
 
 export const fetchQuestionAction = createAsyncThunk<Film[], undefined, {
@@ -59,7 +60,12 @@ export const postNewCommentsByID = createAsyncThunk<void, NewCommentData, {
       comment: comment,
       rating: rating
     });
-    dispatch(redirectToRoute(`${AppRoute.FilmsList}/${id}`));
+    try {
+      dispatch(redirectToRoute(`${AppRoute.FilmsList}/${id}`));
+      toast.success('Комментарий успещно отправлен.');
+    } catch {
+      toast.warn('У нас технические плюшки, отправьте комментарий позже.');
+    }
   },
 );
 
@@ -71,7 +77,8 @@ export const getSimilarFilmsByID = createAsyncThunk<void, string | undefined, {
   'data/getSimilarFilmsByID',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
-    dispatch(loadSimilarFilmsByID(data));
+    const similarFilms = data.filter((film) => film.id.toString() !== id);
+    dispatch(loadSimilarFilmsByID(similarFilms));
   },
 );
 

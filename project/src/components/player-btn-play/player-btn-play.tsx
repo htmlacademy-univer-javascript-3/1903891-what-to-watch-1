@@ -9,7 +9,7 @@ function PlayerBtnPlay() {
   const dispatch = useAppDispatch();
 
   const handlePlay = () => {
-    dispatch(setNewStateIsPlaying());
+    dispatch(setNewStateIsPlaying(!isPlaying));
   };
 
   return (

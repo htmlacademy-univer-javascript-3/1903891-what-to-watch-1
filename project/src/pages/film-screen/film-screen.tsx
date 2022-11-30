@@ -11,6 +11,7 @@ import {getCommentsByID, getFavoriteFilms, getFilmByID, getSimilarFilmsByID} fro
 import {changeTabsCard} from '../../store/film-card/film-card.reducer';
 import NotFoundPage from '../../components/not-found-page/not-found-page';
 import DescriptionFilmsWithNav from '../../components/description-films-with-nav/description-films-with-nav';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function FilmScreen() {
   const params = useParams();
@@ -19,6 +20,7 @@ function FilmScreen() {
 
   const film = useAppSelector((state) => state.filmCard.filmByID);
   const films = useAppSelector((state) => state.filmList.films);
+  const isLoading = useAppSelector((state) => state.dataPage.isDataLoading);
   const similarFilmsByGenre = useAppSelector((state) => state.filmCard.similarFilmsByID).slice(0, 4);
 
   useEffect(() => {
@@ -36,18 +38,22 @@ function FilmScreen() {
     }
   }, [prodId]);
 
-  if (!film) {
+  if (!film && isLoading) {
     return <NotFoundPage/>;
+  }
+
+  if (!isLoading) {
+    return <LoadingScreen/>;
   }
 
   return (
     <Fragment>
       <section className="film-card film-card--full">
-        <FilmCardHero film={film}/>
+        {film && <FilmCardHero film={film}/>}
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt={film.name} width="218" height="327"/>
+              <img src={film?.posterImage} alt={film?.name} width="218" height="327"/>
             </div>
 
             <DescriptionFilmsWithNav/>
