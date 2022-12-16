@@ -26,14 +26,18 @@ function HeaderLoginIn() {
       </li>
       <li className="user-block__item">
         {
-          authorizationStatus !== AuthorizationStatus.Auth ?
-            <Link to={AppRoute.Login} className="user-block__link">Sign In</Link> :
-            <Link to="/" onClick={(env) => {
-              env.stopPropagation();
-              dispatch(logoutAction());
-            }} className="user-block__link"
-            >Sign Out
-            </Link>
+          authorizationStatus !== AuthorizationStatus.Auth
+            ? (
+              <Link to={AppRoute.Login} className="user-block__link sign-in__btn">Sign In</Link>
+            ) : (
+              <Link to="/" onClick={(env) => {
+                env.stopPropagation();
+                dispatch(logoutAction());
+              }} className="user-block__link"
+              >
+                Sign Out
+              </Link>
+            )
         }
       </li>
     </ul>

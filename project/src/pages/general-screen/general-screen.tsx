@@ -1,26 +1,21 @@
 import {Fragment, useEffect} from 'react';
 
-import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-import HeaderLoginIn from '../../components/header-login-in/header-login-in';
-import FilmCardButton from '../../components/film-card-button/film-card-button';
-
-import Hotel from '../../img/bg-the-grand-budapest-hotel.jpg';
-import HotelPoster from '../../img/the-grand-budapest-hotel-poster.jpg';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks-toolkit';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {setFilmDefault} from '../../store/film-card/film-card.reducer';
-
+import {getPromoFilm} from '../../store/api-actions';
+import FilmCardDescription from '../../components/film-card-description/film-card-description';
+import FilmCardHeaderDescription from '../../components/film-card-header-description/film-card-header-description';
 
 function GeneralScreen() {
-  const films = useAppSelector((state) => state.filmList.films);
   const isDataFilmListLoading = useAppSelector((state) => state.filmList.isDataFilmListLoading);
+  const filmPromo = useAppSelector((state) => state.filmCard.filmByID);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setFilmDefault(films[0]));
+    dispatch(getPromoFilm());
   },);
 
   if (isDataFilmListLoading) {
@@ -30,34 +25,22 @@ function GeneralScreen() {
   return (
     <Fragment>
       <section className="film-card">
-        <div className="film-card__bg">
-          <img src={Hotel} alt="The Grand Budapest Hotel"/>
-        </div>
+        {
+          filmPromo && (
+            <>
+              <FilmCardHeaderDescription film={filmPromo}/>
+              <div className="film-card__wrap">
+                <div className="film-card__info">
+                  <div className="film-card__poster">
+                    <img src={filmPromo?.posterImage} alt={filmPromo?.name} width="218" height="327"/>
+                  </div>
+                  <FilmCardDescription film={filmPromo}/>
+                </div>
+              </div>
+            </>
+          )
+        }
 
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-          <Logo/>
-          <HeaderLoginIn/>
-        </header>
-
-        <div className="film-card__wrap">
-          <div className="film-card__info">
-            <div className="film-card__poster">
-              <img src={HotelPoster} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
-            </div>
-
-            <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
-              </p>
-
-              <FilmCardButton/>
-            </div>
-          </div>
-        </div>
       </section>
 
       <div className="page-content">

@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 import {AuthorizationStatus, NameSpace} from '../../const';
-import {checkAuthAction, getFilmByID, loginAction, logoutAction} from '../api-actions';
+import {checkAuthAction, getFilmByID, getPromoFilm, loginAction, logoutAction} from '../api-actions';
 
 type DataPageState = {
   readonly authorizationStatus: AuthorizationStatus;
@@ -37,9 +37,13 @@ export const dataPageStore = createSlice({
       .addCase(checkAuthAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
+      .addCase(loginAction.pending, (state, action) => {
+        state.isDataLoading = false;
+      })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.avatarUrl = action.payload.avatarUrl;
         state.authorizationStatus = AuthorizationStatus.Auth;
+        state.isDataLoading = true;
       })
       .addCase(loginAction.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -55,6 +59,12 @@ export const dataPageStore = createSlice({
         state.isDataLoading = true;
       })
       .addCase(getFilmByID.rejected, (state, action) => {
+        state.isDataLoading = true;
+      })
+      .addCase(getPromoFilm.pending, (state, action) => {
+        state.isDataLoading = false;
+      })
+      .addCase(getPromoFilm.fulfilled, (state, action) => {
         state.isDataLoading = true;
       });
   }
