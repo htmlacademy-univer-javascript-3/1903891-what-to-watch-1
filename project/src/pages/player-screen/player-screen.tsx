@@ -7,15 +7,22 @@ import ControlsVideo from '../../components/controls-video/controls-video';
 import {getFavoriteFilms, getFilmByID} from '../../store/api-actions';
 import NotFoundPage from '../../components/not-found-page/not-found-page';
 import {setNewStateIsPlaying} from '../../store/player-store/player-store.reducer';
+import LoadingScreen from '../loading-screen/loading-screen';
+import {AppRoute} from '../../const';
 
 function PlayerScreen() {
   const params = useParams();
   const prodId = params.id;
   const film = useAppSelector((state) => state.filmCard.filmByID);
+  const isLoading = useAppSelector((state) => state.dataPage.isDataLoading);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const goBack = () => navigate(-1);
+  const goBack = () => {
+    if (film) {
+      navigate(`${AppRoute.FilmsList}/${film.id}`);
+    }
+  };
 
   useEffect(() => {
     const mounted = true;
@@ -27,8 +34,12 @@ function PlayerScreen() {
   }, [prodId]);
 
 
-  if (!film) {
+  if (!film && isLoading) {
     return <NotFoundPage/>;
+  }
+
+  if (!isLoading) {
+    return <LoadingScreen/>;
   }
 
   return (
