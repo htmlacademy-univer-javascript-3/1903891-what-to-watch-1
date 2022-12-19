@@ -4,7 +4,7 @@ import {Film} from '../../types/film';
 import {FilmCardInfo, NameSpace} from '../../const';
 import {Comment} from '../../types/comment';
 import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card.action';
-import {postNewCommentsByID} from '../api-actions';
+import {getPromoFilm, postNewCommentsByID} from '../api-actions';
 
 type FilmCardState = {
   readonly filmByID: Film | undefined,
@@ -58,6 +58,9 @@ export const filmCardStore = createSlice({
       })
       .addCase(postNewCommentsByID.rejected, (state) => {
         state.isDisabledFormComment = true;
+      })
+      .addCase(getPromoFilm.fulfilled, (state, action) => {
+        state.filmByID = action.payload;
       });
   }
 });

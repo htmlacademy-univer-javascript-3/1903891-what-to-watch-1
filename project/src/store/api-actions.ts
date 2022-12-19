@@ -145,3 +145,15 @@ export const postNewStatusFilmInFavoriteList = createAsyncThunk<UserData, FilmFa
     return userData;
   },
 );
+
+export const getPromoFilm = createAsyncThunk<Film, undefined, {
+  dispatch: AppDispatch,
+  state: RootState,
+  extra: AxiosInstance,
+}>(
+  'film/getPromoFilm',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get(`${APIRoute.PromoFilm}`);
+    return data;
+  },
+);
