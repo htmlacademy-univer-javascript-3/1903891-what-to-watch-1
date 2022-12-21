@@ -18,7 +18,7 @@ function PlayerBtnPlay() {
       className="player__play"
       onClick={handlePlay}
     >
-      {(isPlaying || currentTimeToggle === 100)
+      {(isPlaying && currentTimeToggle !== 100)
         ? (
           <svg viewBox="0 0 14 21" width="19" height="19">
             <use xlinkHref={`${SvgGeneralScreen}#pause`}/>

@@ -35,7 +35,7 @@ function HeaderLoginIn() {
                 dispatch(logoutAction());
               }} className="user-block__link"
               >
-                Sign Out
+                Sign out
               </Link>
             )
         }

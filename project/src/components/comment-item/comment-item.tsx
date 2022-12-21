@@ -14,8 +14,9 @@ function CommentItem(props: CommentItemProps) {
   const {comment} = props;
   const commentDate = new Date(comment.date);
 
-  const dataCommentHumanType = `${getMonthString(commentDate?.getMonth())} ${commentDate?.getDay()}, ${commentDate?.getFullYear()}`;
-  const dataCommentProgramType = [commentDate?.getFullYear(), commentDate?.getMonth() + 1, commentDate?.getDay()].join('-');
+  const dataCommentHumanType = `${getMonthString(commentDate?.getMonth())} ${commentDate?.getDate()}, ${commentDate?.getFullYear()}`;
+  const dataCommentProgramType = [commentDate?.getFullYear(), commentDate?.getMonth() + 1, commentDate?.getDate()].join('-');
+
   return (
     <div className="review">
       <blockquote className="review__quote">
