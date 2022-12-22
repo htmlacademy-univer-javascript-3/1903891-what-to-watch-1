@@ -3,7 +3,7 @@ import SvgGeneralScreen from '../../svg/svg-general-screen.svg';
 import '../../css/main.min.css';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import { useAppSelector} from '../../hooks/hooks-toolkit';
-import ButtonMyList from '../button-myList/button-myList';
+import ButtonMyList from '../button-my-list/button-my-list';
 
 function FilmCardButton() {
   const film = useAppSelector((state) => state.filmCard.filmByID);

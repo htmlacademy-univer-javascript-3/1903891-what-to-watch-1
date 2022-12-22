@@ -22,19 +22,16 @@ function FullVideoPlayer(props: videoPlayerProps) {
   }, [isFullVideo]);
 
   useEffect(() => {
-    // if(videoRefFullVideo.current?.readyState){
-    //   (isPlaying && videoRefFullVideo.current?.readyState === 4) ? videoRefFullVideo.current?.play() : videoRefFullVideo.current?.pause();
-    // }
     isPlaying ? videoRefFullVideo.current?.play() : videoRefFullVideo.current?.pause();
   }, [isPlaying]);
 
-
-  const handlerTimeUpdate = () => {
+  const handleUpdateTime = () => {
     const durationTime = videoRefFullVideo.current?.duration;
     const currentTime = videoRefFullVideo.current?.currentTime;
     if (durationTime && currentTime) {
       const currentToggler = currentTime * 100 / durationTime;
       const timeLeft = durationTime - currentTime;
+      console.log(timeLeft)
       dispatch(setCurrentTime({
         currentToggler: currentToggler,
         timeLeft: timeLeft
@@ -42,16 +39,23 @@ function FullVideoPlayer(props: videoPlayerProps) {
     }
   };
 
-  return (
+  const handleClickOnVideo = () => {
+    dispatch(setNewStateIsPlaying(!isPlaying));
+  };
 
+  return (
     <video
       ref={videoRefFullVideo}
       className="player__video"
       poster={posterImage}
-      onTimeUpdate={handlerTimeUpdate}
+      onTimeUpdate={handleUpdateTime}
       onCanPlayThrough={() => dispatch(setNewStateIsPlaying(true))}
+      onClick={handleClickOnVideo}
+      autoPlay
+      muted
     >
       <source src={videoLink} type="video/mp4"/>
+      <p>Ваш веб-браузер не поддерживает наш формат video.</p>
     </video>
   );
 }

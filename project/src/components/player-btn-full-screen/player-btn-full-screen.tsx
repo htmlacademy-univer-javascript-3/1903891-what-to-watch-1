@@ -6,12 +6,12 @@ import {setNewStateIsFullScreen} from '../../store/player-store/player-store.red
 function PlayerBtnFullScreen() {
   const dispatch = useAppDispatch();
 
-  const handlerClickFullScreen = () => {
+  const handleClickFullScreen = () => {
     dispatch(setNewStateIsFullScreen());
   };
 
   return (
-    <button type="button" className="player__full-screen" onClick={handlerClickFullScreen}>
+    <button type="button" className="player__full-screen" onClick={handleClickFullScreen}>
       <svg viewBox="0 0 27 27" width="27" height="27">
         <use xlinkHref={`${SvgGeneralScreen}#full-screen`}/>
       </svg>

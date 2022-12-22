@@ -4,7 +4,6 @@ import {AppDispatch, RootState} from './store';
 import {AxiosInstance} from 'axios';
 import {APIRoute, AppRoute} from '../const';
 import {Comment} from '../types/comment';
-import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card/film-card.action';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/userData';
 import {NewCommentData} from '../types/new-comment-data';
@@ -12,7 +11,6 @@ import {dropToken, saveToken} from '../services/token';
 import {redirectToRoute} from './actions';
 import {FilmFavoriteListStatus} from '../types/film-list-favorite-status';
 import {toast} from 'react-toastify';
-
 
 export const fetchQuestionAction = createAsyncThunk<Film[], undefined, {
   state: RootState,
@@ -25,7 +23,7 @@ export const fetchQuestionAction = createAsyncThunk<Film[], undefined, {
   },
 );
 
-export const getFilmByID = createAsyncThunk<void, string | undefined, {
+export const getFilmByID = createAsyncThunk<Film, string | undefined, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance,
@@ -33,11 +31,11 @@ export const getFilmByID = createAsyncThunk<void, string | undefined, {
   'data/getFilmByID',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(`${APIRoute.Films}/${id}`);
-    dispatch(loadFilmByID(data));
+    return data;
   },
 );
 
-export const getCommentsByID = createAsyncThunk<void, string | undefined, {
+export const getCommentsByID = createAsyncThunk<Comment[], string | undefined, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance,
@@ -45,7 +43,7 @@ export const getCommentsByID = createAsyncThunk<void, string | undefined, {
   'data/getCommentsByID',
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Comment[]>(`${APIRoute.Comments}/${id}`);
-    dispatch(loadCommentsByID(data));
+    return data;
   },
 );
 
@@ -56,20 +54,20 @@ export const postNewCommentsByID = createAsyncThunk<void, NewCommentData, {
 }>(
   'comments/postNewCommentsByID',
   async ({id, comment, rating}, {dispatch, extra: api}) => {
-    await api.post<any>(`${APIRoute.Comments}/${id}`, {
-      comment: comment,
-      rating: rating
-    });
     try {
+      await api.post<any>(`${APIRoute.Comments}/${id}`, {
+        comment: comment,
+        rating: rating
+      });
       dispatch(redirectToRoute(`${AppRoute.FilmsList}/${id}`));
-      toast.success('Комментарий успещно отправлен.');
+      toast.success('Комментарий успешно отправлен.');
     } catch {
       toast.warn('У нас технические плюшки, отправьте комментарий позже.');
     }
   },
 );
 
-export const getSimilarFilmsByID = createAsyncThunk<void, string | undefined, {
+export const getSimilarFilmsByID = createAsyncThunk<Film[], string | undefined, {
   dispatch: AppDispatch,
   state: RootState,
   extra: AxiosInstance,
@@ -78,7 +76,7 @@ export const getSimilarFilmsByID = createAsyncThunk<void, string | undefined, {
   async (id, {dispatch, extra: api}) => {
     const {data} = await api.get<Film[]>(`${APIRoute.Films}/${id}/similar`);
     const similarFilms = data.filter((film) => film.id.toString() !== id);
-    dispatch(loadSimilarFilmsByID(similarFilms));
+    return similarFilms;
   },
 );
 

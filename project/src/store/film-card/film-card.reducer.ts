@@ -3,8 +3,8 @@ import {Film} from '../../types/film';
 
 import {FilmCardInfo, NameSpace} from '../../const';
 import {Comment} from '../../types/comment';
-import {loadCommentsByID, loadFilmByID, loadSimilarFilmsByID} from './film-card.action';
-import {getPromoFilm, postNewCommentsByID} from '../api-actions';
+import {getCommentsByID, getFilmByID, getPromoFilm, getSimilarFilmsByID, postNewCommentsByID} from '../api-actions';
+import {toast} from 'react-toastify';
 
 type FilmCardState = {
   readonly filmByID: Film | undefined,
@@ -41,23 +41,21 @@ export const filmCardStore = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(loadFilmByID, (state, action) => {
+      .addCase(getFilmByID.fulfilled, (state, action) => {
         state.filmByID = action.payload;
       })
-      .addCase(loadCommentsByID, (state, action) => {
+      .addCase(getCommentsByID.fulfilled, (state, action) => {
         state.commentsByID = action.payload;
       })
-      .addCase(loadSimilarFilmsByID, (state, action) => {
+      .addCase(getSimilarFilmsByID.fulfilled, (state, action) => {
         state.similarFilmsByID = action.payload;
       })
       .addCase(postNewCommentsByID.fulfilled, (state, action) => {
         state.isDisabledFormComment = false;
-        // if (state.filmByID !== undefined) {
-        //   (redirectToRoute(`${AppRoute.FilmsList}/${state?.filmByID.id}`))
-        // }
       })
       .addCase(postNewCommentsByID.rejected, (state) => {
         state.isDisabledFormComment = true;
+        toast.warn('У нас технические плюшки, отправьте комментарий позже.');
       })
       .addCase(getPromoFilm.fulfilled, (state, action) => {
         state.filmByID = action.payload;

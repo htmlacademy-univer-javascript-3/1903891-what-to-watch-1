@@ -13,13 +13,11 @@ export function getFilterFilmsByGenre(genre: string, filmList: Film[]): Film[] {
   return filmList.filter((filmItem) => filmItem.genre === genre);
 }
 
-//export const loadFilms = createAction<Film[]>('data/loadFilms');
-
 export function getUniqGenreByFilms(filmList: Film[]): Genre[] {
   const genreFilmList: string[] = [];
   filmList.map((film) => genreFilmList.push(film.genre));
   const uniqGenres = [...new Set(genreFilmList)];
   const genres = uniqGenres.map((genre, id) => ({genre: genre, id: id}));
 
-  return [{genre: 'All genres', id: 52105522456}, ...genres];
+  return [{genre: 'All genres', id: -1}, ...genres];
 }
