@@ -22,10 +22,15 @@ function SignInScreen() {
     e.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
+      if (passwordRef.current.value.length !== 0) {
+        setIsPasswordValid(true);
+        onSubmit({
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        });
+      } else {
+        setIsPasswordValid(false);
+      }
     }
   };
 

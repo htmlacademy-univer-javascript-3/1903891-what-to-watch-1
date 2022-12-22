@@ -1,4 +1,4 @@
-import {dataPageStore} from './data-page.reducer';
+import {changeAuthorizationStatus, dataPageStore} from './data-page.reducer';
 import {AuthorizationStatus} from '../../const';
 import {checkAuthAction, loginAction, logoutAction} from '../api-actions';
 import {makeFakeUser} from '../../utils/moks';
@@ -15,7 +15,7 @@ const fakeUser = makeFakeUser();
 describe('Reducer: data-page', () => {
 
   describe('checkAuthAction test', () => {
-    it('should update authorizationStatus to "AUTH" & avatar shoud be not null if checkAuthAction fulfilled', () => {
+    it('should update authorizationStatus to "AUTH" & avatar should be not null if checkAuthAction fulfilled', () => {
       const avatarUrl = fakeUser.avatarUrl;
       expect(dataPageStore.reducer(initialDataPageState, {type: checkAuthAction.fulfilled.type, payload: {avatarUrl: avatarUrl}}))
         .toEqual({
@@ -71,8 +71,8 @@ describe('Reducer: data-page', () => {
         isDataLoading: true,
         avatarUrl: avatarUrl,
         error: null
-      }
-      expect(dataPageStore.reducer(stateLogout, { type: logoutAction.fulfilled.type }))
+      };
+      expect(dataPageStore.reducer(stateLogout, {type: logoutAction.fulfilled.type}))
         .toEqual({
           authorizationStatus: AuthorizationStatus.NoAuth,
           isDataLoading: true,
@@ -97,6 +97,17 @@ describe('Reducer: data-page', () => {
       .toEqual({
         authorizationStatus: AuthorizationStatus.Unknown,
         isDataLoading: true,
+        avatarUrl: null,
+        error: null
+      });
+  });
+
+  it('change authorization status to "AUTH"', () => {
+    const state = initialDataPageState;
+    expect(dataPageStore.reducer(state, changeAuthorizationStatus(AuthorizationStatus.Auth)))
+      .toEqual({
+        authorizationStatus: AuthorizationStatus.Auth,
+        isDataLoading: false,
         avatarUrl: null,
         error: null
       });

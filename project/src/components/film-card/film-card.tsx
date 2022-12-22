@@ -13,20 +13,20 @@ function FilmCard(props: FilmCardProps) {
   const [activeFilmCard, setActiveFilmCard] = useState(false);
   const navigate = useNavigate();
 
-  function onMouseOverHandler() {
+  function handleOverMouse() {
     setActiveFilmCard(true);
   }
 
-  function onMouseLeaveHandler() {
+  function handleLeaveMouse() {
     setActiveFilmCard(false);
   }
 
-  function onClickCard() {
+  function handleClickCard() {
     navigate(`${AppRoute.FilmsList}/${film.id}`);
   }
 
   return (
-    <article onClick={onClickCard} className="small-film-card catalog__films-card" onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
+    <article onClick={handleClickCard} className="small-film-card catalog__films-card" onMouseOver={handleOverMouse} onMouseLeave={handleLeaveMouse}>
       <div className="small-film-card__image">
         {
           activeFilmCard ? (<VideoPlayer videoLink={film.previewVideoLink} posterImage={film.posterImage} isSound={false}/>)

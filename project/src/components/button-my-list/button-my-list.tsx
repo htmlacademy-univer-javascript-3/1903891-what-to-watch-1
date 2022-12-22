@@ -21,7 +21,7 @@ function ButtonMyList() {
     }
   }, []);
 
-  const onAddInFavorite = () => {
+  const handleAddInFavorite = () => {
     dispatch(postNewStatusFilmInFavoriteList({
       filmStatus: FilmFavoriteStatus.Add,
       filmId: film!.id.toString()
@@ -32,12 +32,12 @@ function ButtonMyList() {
   const handleClickToggleStatusFavorite = () => {
     if (film !== undefined) {
       isChosenFavorite
-        ? onDeleteInFavorite()
-        : onAddInFavorite();
+        ? handleDeleteInFavorite()
+        : handleAddInFavorite();
     }
   };
 
-  const onDeleteInFavorite = () => {
+  const handleDeleteInFavorite = () => {
     dispatch(postNewStatusFilmInFavoriteList({
       filmStatus: FilmFavoriteStatus.Delete,
       filmId: film!.id.toString()

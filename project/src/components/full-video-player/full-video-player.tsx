@@ -25,12 +25,13 @@ function FullVideoPlayer(props: videoPlayerProps) {
     isPlaying ? videoRefFullVideo.current?.play() : videoRefFullVideo.current?.pause();
   }, [isPlaying]);
 
-  const handlerTimeUpdate = () => {
+  const handleUpdateTime = () => {
     const durationTime = videoRefFullVideo.current?.duration;
     const currentTime = videoRefFullVideo.current?.currentTime;
     if (durationTime && currentTime) {
       const currentToggler = currentTime * 100 / durationTime;
       const timeLeft = durationTime - currentTime;
+      console.log(timeLeft)
       dispatch(setCurrentTime({
         currentToggler: currentToggler,
         timeLeft: timeLeft
@@ -38,7 +39,7 @@ function FullVideoPlayer(props: videoPlayerProps) {
     }
   };
 
-  const handlerClickOnVideo = () => {
+  const handleClickOnVideo = () => {
     dispatch(setNewStateIsPlaying(!isPlaying));
   };
 
@@ -47,9 +48,11 @@ function FullVideoPlayer(props: videoPlayerProps) {
       ref={videoRefFullVideo}
       className="player__video"
       poster={posterImage}
-      onTimeUpdate={handlerTimeUpdate}
+      onTimeUpdate={handleUpdateTime}
       onCanPlayThrough={() => dispatch(setNewStateIsPlaying(true))}
-      onClick={handlerClickOnVideo}
+      onClick={handleClickOnVideo}
+      autoPlay
+      muted
     >
       <source src={videoLink} type="video/mp4"/>
       <p>Ваш веб-браузер не поддерживает наш формат video.</p>

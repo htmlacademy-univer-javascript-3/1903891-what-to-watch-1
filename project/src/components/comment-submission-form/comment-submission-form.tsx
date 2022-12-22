@@ -9,7 +9,7 @@ function CommentSubmissionForm() {
   const idFilms = useAppSelector((state) => state.filmCard.filmByID?.id);
 
   const dispatch = useAppDispatch();
-  const handlerFormSubmit = (e: FormEvent) => {
+  const handleSubmitForm = (e: FormEvent) => {
     e.preventDefault();
     if (rating !== null && idFilms !== undefined) {
       dispatch(postNewCommentsByID({id: idFilms, comment: reviewText, rating}));
@@ -35,7 +35,7 @@ function CommentSubmissionForm() {
           className="add-review__btn"
           type="submit"
           disabled={reviewText.length < 50 || reviewText.length > 400 || rating === null || isDisabled}
-          onClick={handlerFormSubmit}
+          onClick={handleSubmitForm}
         >
           Post
         </button>

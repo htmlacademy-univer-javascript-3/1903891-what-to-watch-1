@@ -10,13 +10,13 @@ function ItemGenreList(props: ItemGenreListProps,) {
   const {genre, active} = props;
   const dispatch = useAppDispatch();
 
-  const handlerClick = () => {
+  const handleClick = () => {
     dispatch(changeGenreAction(genre));
   };
 
   return (
     <li className={`catalog__genres-item ${active ? 'catalog__genres-item--active' : ''}`}>
-      <div className="catalog__genres-link" onClick={handlerClick}>{genre}</div>
+      <div className="catalog__genres-link" onClick={handleClick}>{genre}</div>
     </li>
   );
 }

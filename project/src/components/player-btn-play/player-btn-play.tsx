@@ -8,7 +8,7 @@ function PlayerBtnPlay() {
   const currentTimeToggle = useAppSelector((state) => state.player.currentToggler);
   const dispatch = useAppDispatch();
 
-  const handlePlay = () => {
+  const handlePlayVideo = () => {
     dispatch(setNewStateIsPlaying(!isPlaying));
   };
 
@@ -16,7 +16,7 @@ function PlayerBtnPlay() {
     <button
       type="button"
       className="player__play"
-      onClick={handlePlay}
+      onClick={handlePlayVideo}
     >
       {(isPlaying && currentTimeToggle !== 100)
         ? (

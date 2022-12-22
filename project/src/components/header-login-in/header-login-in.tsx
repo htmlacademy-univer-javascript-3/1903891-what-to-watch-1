@@ -10,7 +10,7 @@ function HeaderLoginIn() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onClickImgAvatar = () => {
+  const handleClickImgAvatar = () => {
     navigate(AppRoute.MyList);
   };
 
@@ -19,7 +19,7 @@ function HeaderLoginIn() {
       <li className="user-block__item">
         {
           avatar !== null &&
-          <div onClick={onClickImgAvatar} className="user-block__avatar">
+          <div onClick={handleClickImgAvatar} className="user-block__avatar">
             <img src={avatar} alt="User avatar" width="63" height="63"/>
           </div>
         }

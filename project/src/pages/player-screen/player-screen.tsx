@@ -18,7 +18,7 @@ function PlayerScreen() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const goBack = () => {
+  const goBackPage = () => {
     if (film) {
       navigate(`${AppRoute.FilmsList}/${film.id}`);
     }
@@ -49,7 +49,7 @@ function PlayerScreen() {
         posterImage={film!.backgroundImage}
         isSound
       />
-      <button type="button" className="player__exit" onClick={goBack}>Exit</button>
+      <button type="button" className="player__exit" onClick={goBackPage}>Exit</button>
       <ControlsVideo/>
     </div>
   );

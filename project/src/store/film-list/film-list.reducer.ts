@@ -33,9 +33,7 @@ export const filmListStore = createSlice({
       if (newGenre === 'All genres') {
         state.filmsByGenre = state.films;
       } else {
-        if (state.films !== undefined) {
-          state.filmsByGenre = getFilterFilmsByGenre(newGenre, state.films);
-        }
+        state.filmsByGenre = getFilterFilmsByGenre(newGenre, state.films);
       }
     }
   },
@@ -47,9 +45,7 @@ export const filmListStore = createSlice({
       .addCase(fetchQuestionAction.fulfilled, (state, action) => {
         state.films = action.payload;
         state.filmsByGenre = state.films;
-        if (state.films !== undefined) {
-          state.genreList = getUniqGenreByFilms(state.films);
-        }
+        state.genreList = getUniqGenreByFilms(state.films);
         state.isDataFilmListLoading = false;
       });
   }

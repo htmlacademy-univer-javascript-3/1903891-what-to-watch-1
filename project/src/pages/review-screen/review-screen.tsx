@@ -28,7 +28,7 @@ function ReviewScreen() {
     dispatch(setNewStateIsPlaying(false));
   }, [prodId]);
 
-  function handlerChooseNewRating(rating: number) {
+  function handleChooseNewRating(rating: number) {
     dispatch(setRatingFilms(rating));
   }
 
@@ -80,7 +80,7 @@ function ReviewScreen() {
                       type="radio"
                       name="rating"
                       value={index + 1}
-                      onInput={() => handlerChooseNewRating(11 - (index + 1))}
+                      onInput={() => handleChooseNewRating(11 - (index + 1))}
                     />
                     <label className="rating__label" htmlFor={`star-${index + 1}`}>Rating {index + 1}</label>
                   </Fragment>
