@@ -27,7 +27,12 @@ describe('Reducer: data-page', () => {
     });
     it('should update authorizationStatus to "NO_AUTH" if checkAuthAction rejected', () => {
       expect(dataPageStore.reducer(initialDataPageState, {type: checkAuthAction.rejected.type}))
-        .toEqual({authorizationStatus: AuthorizationStatus.NoAuth});
+        .toEqual({
+          authorizationStatus: AuthorizationStatus.NoAuth,
+          avatarUrl: null,
+          error: null,
+          isDataLoading: false
+        });
     });
   });
 
@@ -55,9 +60,9 @@ describe('Reducer: data-page', () => {
       expect(dataPageStore.reducer(initialDataPageState, {type: loginAction.rejected.type}))
         .toEqual({
           authorizationStatus: AuthorizationStatus.NoAuth,
-          isDataLoading: false,
           avatarUrl: null,
-          error: null
+          error: null,
+          isDataLoading: false
         });
     });
   });
