@@ -1,5 +1,4 @@
 import {playerStoreReducer, setCurrentTime, setNewStateIsFullScreen, setNewStateIsPlaying} from './player-store.reducer';
-import {changeGenreAction, filmListStore} from '../film-list/film-list.reducer';
 
 const initialPlayerStoreReducerState = {
   isPlaying: false,
