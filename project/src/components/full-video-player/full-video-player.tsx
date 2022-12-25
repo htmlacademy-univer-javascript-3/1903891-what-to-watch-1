@@ -31,7 +31,6 @@ function FullVideoPlayer(props: videoPlayerProps) {
     if (durationTime && currentTime) {
       const currentToggler = currentTime * 100 / durationTime;
       const timeLeft = durationTime - currentTime;
-      console.log(timeLeft)
       dispatch(setCurrentTime({
         currentToggler: currentToggler,
         timeLeft: timeLeft

@@ -16,7 +16,7 @@ function GeneralScreen() {
 
   useEffect(() => {
     dispatch(getPromoFilm());
-  },);
+  }, []);
 
   if (isDataFilmListLoading) {
     return (<LoadingScreen/>);
